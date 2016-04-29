@@ -62,8 +62,8 @@ License: You must have a valid license purchased only from themeforest(the above
 				<li class="classic-menu-dropdown"><a href="../index.html">首页</a></li>
 				<li class="classic-menu-dropdown"><a href="../finance/detailsList.html">财务</a></li>
 				<li class="classic-menu-dropdown"><a href="../statistics/orderSales.html">统计</a></li>
-				<li class="classic-menu-dropdown"><a href="../vote/voteList.html">营销</span></a></li>
-				<li class="classic-menu-dropdown active"><a href="../dataBase/backup.html">设置<span class="selected"></span></a></li>
+				<li class="classic-menu-dropdown active"><a href="../user/levelList.html">会员</a></li>
+				<li class="classic-menu-dropdown"><a href="../vote/voteList.html">营销<span class="selected"></span></a></li>
 			</ul>
 		</div>
 	</div>
@@ -79,10 +79,9 @@ License: You must have a valid license purchased only from themeforest(the above
 		<div class="page-sidebar navbar-collapse collapse">
 			<ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
 				<li class="active open">
-					<a href="javascript:;"><i class="fa fa-credit-card "></i><span class="title">数据管理</span><span class="selected"></span><span class="arrow"></span></a>
+					<a href="javascript:;"><i class="fa fa-credit-card "></i><span class="title">会员管理</span><span class="selected"></span><span class="arrow"></span></a>
 					<ul class="sub-menu">
-						<li class="active"><a href="../dataBase/backup.html">数据备份</a></li>
-						<li><a href="../dataBase/recovery.html">数据恢复</a></li>
+						<li class="active"><a href="../user/levelList.html">等级管理</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -93,28 +92,82 @@ License: You must have a valid license purchased only from themeforest(the above
 	<div class="page-content-wrapper">
 		<div class="page-content" style="min-height:812px">
 			<!--标题栏-->
-			<h3 class="page-title">数据备份 <small>备份整个系统的数据库结构和数据</small></h3>
+			<h3 class="page-title">等级管理 <small>查看和管理会员等级</small></h3>
 			<!--路径导航-->
 			<div class="page-bar">
 				<ul class="page-breadcrumb">
 					<li><i class="fa fa-home"></i><a href="#">首页</a><i class="fa fa-angle-right"></i></li>
-					<li><a href="#">设置</a><i class="fa fa-angle-right"></i></li>
-					<li><a href="#">数据管理</a><i class="fa fa-angle-right"></i></li>
-					<li><a href="#">数据备份</a></li>
+					<li><a href="#">会员</a><i class="fa fa-angle-right"></i></li>
+					<li><a href="#">会员管理</a><i class="fa fa-angle-right"></i></li>
+					<li><a href="#">等级管理</a></li>
 				</ul>
 			</div>
-			<!--内容-->
-			<div class="note note-success">
-				<p>说明：您可以在此处备份整个系统的数据库结构和数据，一旦系统数据意外损坏，您可以通过数据库恢复功能恢复所备份的数据。</p>
-				<p>备份过程中请勿进行其他页面操作。</p>
-				<p>上次备份时间：<span id="backUpTime">2016-04-25 16:08:33</span> </p>
-			</div>
+			<!--表格列表-->
 			<div class="row">
 				<div class="col-md-12">
-					<button type="button" class="btn blue " id="backUpBtn" onclick="runBackUp('')">开始备份</button>
-					<span id="BackupProgess"></span>
+					<div class="portlet-body">
+						<!--工具-->
+						<div class="table-toolbar">
+							<div class="row">
+								<div class="col-md-6">
+									<a class="btn green" href="../user/addLevel.html">新增 <i class="fa fa-plus"></i></a>
+									<a class="checkDel btn red" href="javascript:;">删除勾选项</a>
+								</div>
+							</div>
+						</div>
+						<!--表格-->
+						<div class="dataTables_wrapper no-footer" id="sample_1_wrapper">
+							<div class="table-scrollable">
+								<table class="table table-striped table-bordered table-hover dataTable no-footer" id="sample_1" role="grid" aria-describedby="sample_1_info">
+									<thead>
+										<tr role="row">
+											<th width="80"><input type="checkbox" class="group-checkable" id="allCheck">ID</th>
+											<th width="200">等级名称</th>
+											<th width="200">角色</th>
+											<th width="250">条件</th>
+											<th width="350">备注</th>
+											<th>操作</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr data-id="1" class="gradeX odd" role="row"> 
+											<td><input type="checkbox" class="group-checkable checkbox">1</td>
+											<td>普通会员</td>
+											<td>普通用户</td>
+											<td>免费注册</td>
+											<td></td>
+											<td>
+												<a href="" class="btn green">编辑 <i class="glyphicon glyphicon-edit"></i></a>
+												<a href="javascript:;" class="delete btn red">删除 <i class="glyphicon glyphicon-remove"></i></a>	
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<!--分页-->
+						<div class="row">
+							<div class="col-md-12 col-sm-12">
+								<div class="dataTables_paginate paging_bootstrap_full_number pull-right" id="sample_1_paginate">
+									<ul class="pagination" style="visibility: visible;">
+										<li class="prev disabled"><a href="#" title="First"><i class="fa fa-angle-double-left"></i></a></li>
+										<li class="prev disabled"><a href="#" title="Prev"><i class="fa fa-angle-left"></i></a></li>
+										<li class="active"><a href="#">1</a></li>
+										<li><a href="#">2</a></li>
+										<li><a href="#">3</a></li>
+										<li><a href="#">4</a></li>
+										<li><a href="#">5</a></li>
+										<li class="next"><a href="#" title="Next"><i class="fa fa-angle-right"></i></a></li>
+										<li class="next"><a href="#" title="Last"><i class="fa fa-angle-double-right"></i></a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<!--分页 /-->
+					</div>
 				</div>
 			</div>
+			<!--表格结束 /-->
 		</div>
 	</div>
 	<!--content-wrapper /-->
@@ -166,42 +219,57 @@ $(function() {
 	QuickSidebar.init(); // init quick sidebar
 	Demo.init(); // init demo features
 });
-//备份
-var progress=$("#BackupProgess"),
-	backUpBtn=$("#backUpBtn");
-function runBackUp(url){
-	var url=url;
-	backUpBtn.text('备份中...').removeClass("blue").addClass("disabled");
-	if(!url){
-		progress.html('正在备份第1卷，请勿进行其他页面操作。');
-		url="http://192.168.1.250/zzb_wap/testApi/backup.php?num=1";
+//勾选
+$("#allCheck").click(function(){
+	var _this=$(this),
+		cb=$(".checkbox");
+	if(_this.attr("checked") == "checked"){
+		cb.attr("checked","checked");
+		cb.parent().addClass("checked");
+		cb.parent().parent().addClass("checked");
+	}else{
+		cb.removeAttr("checked","checked");
+		cb.parent().removeClass("checked");
+		cb.parent().parent().removeClass("checked");
 	}
-	new backUpAjax(url);
-}
-//备份请求
-function backUpAjax(url){
-	$.ajax({
-		url:url,
-		dataType: 'json',
-    	type: 'post',
-	}).done(function(data){
-		if(data.success==0){
-			//成功，继续分卷
-			setTimeout(function(){
-				progress.html('正在备份第'+data.num+'卷，请勿进行其他页面操作。');
-				new runBackUp(data.url);
-			},1000)
-		}else if(data.success==1){
-			//分卷结束
-			progress.html('<a href="'+data.downUrl+'">备份完毕，请点击本处下载</a>');
-			backUpBtn.text('开始备份').removeClass("disabled").addClass("blue");
-			$("#backUpTime").text(data.time);
-		}else if(data.success==2){
-			//失败
-			backUpBtn.text('开始备份').removeClass("disabled").addClass("blue");
+})
+//删除
+$('.delete').click(function(){
+	var tr = $(this).closest('tr');
+	var id = $(this).closest('tr').data('id');
+	if (confirm('确定删除？')){
+		$.post('url',{id:id},function(data){
+			if (data.errno == 0){
+				tr.remove();
+				return;
+			}else{
+				alert(data.msg);
+			}
+		})
+	}
+})
+//勾选删除
+$(".checkDel").click(function(){
+	var cBoxs=$("input.checkbox:checked");
+	var arr=new Array();
+	if(cBoxs.length>0){
+		$.each(cBoxs,function(i,d){
+			var id=$(d).closest('tr').data('id');
+			arr[i]=id;
+		})
+		if (confirm('确定删除？')){
+			$.post('url',{ids:arr},function(data){
+				if (data.errno == 0){
+					window.location.reload();
+				}else{
+					alert(data.msg);
+				}
+			})
 		}
-	})
-}
+	}else{
+		alert("至少勾选一项");
+	}
+})
 </script>
 <!-- END JAVASCRIPTS -->
 </body>

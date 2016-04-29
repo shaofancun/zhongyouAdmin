@@ -63,7 +63,7 @@ License: You must have a valid license purchased only from themeforest(the above
 				<li class="classic-menu-dropdown"><a href="../finance/detailsList.html">财务</a></li>
 				<li class="classic-menu-dropdown"><a href="../statistics/orderSales.html">统计</a></li>
 				<li class="classic-menu-dropdown"><a href="../vote/voteList.html">营销</span></a></li>
-				<li class="classic-menu-dropdown active"><a href="../dataBase/backup.html">设置<span class="selected"></span></a></li>
+				<li class="classic-menu-dropdown active"><a href="../systemSet/basicSet">设置<span class="selected"></span></a></li>
 			</ul>
 		</div>
 	</div>
@@ -81,7 +81,14 @@ License: You must have a valid license purchased only from themeforest(the above
 				<li class="active open">
 					<a href="javascript:;"><i class="fa fa-credit-card "></i><span class="title">数据管理</span><span class="selected"></span><span class="arrow"></span></a>
 					<ul class="sub-menu">
-						<li class="active"><a href="../dataBase/backup.html">数据备份</a></li>
+						<li><a href="../systemSet/basicSet.html">基本设置</a></li>
+						<li class="active"><a href="../systemSet/logisticalSet.html">物流设置</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="javascript:;"><i class="fa fa-credit-card "></i><span class="title">数据管理</span><span class="selected"></span><span class="arrow"></span></a>
+					<ul class="sub-menu">
+						<li><a href="../dataBase/backup.html">数据备份</a></li>
 						<li><a href="../dataBase/recovery.html">数据恢复</a></li>
 					</ul>
 				</li>
@@ -93,26 +100,50 @@ License: You must have a valid license purchased only from themeforest(the above
 	<div class="page-content-wrapper">
 		<div class="page-content" style="min-height:812px">
 			<!--标题栏-->
-			<h3 class="page-title">数据备份 <small>备份整个系统的数据库结构和数据</small></h3>
+			<h3 class="page-title">物流设置 <small>设置不同地区的物流费用</small></h3>
 			<!--路径导航-->
 			<div class="page-bar">
 				<ul class="page-breadcrumb">
 					<li><i class="fa fa-home"></i><a href="#">首页</a><i class="fa fa-angle-right"></i></li>
 					<li><a href="#">设置</a><i class="fa fa-angle-right"></i></li>
-					<li><a href="#">数据管理</a><i class="fa fa-angle-right"></i></li>
-					<li><a href="#">数据备份</a></li>
+					<li><a href="#">系统设置</a><i class="fa fa-angle-right"></i></li>
+					<li><a href="#">物流设置</a></li>
 				</ul>
 			</div>
-			<!--内容-->
-			<div class="note note-success">
-				<p>说明：您可以在此处备份整个系统的数据库结构和数据，一旦系统数据意外损坏，您可以通过数据库恢复功能恢复所备份的数据。</p>
-				<p>备份过程中请勿进行其他页面操作。</p>
-				<p>上次备份时间：<span id="backUpTime">2016-04-25 16:08:33</span> </p>
-			</div>
+			<!--表单-->
 			<div class="row">
 				<div class="col-md-12">
-					<button type="button" class="btn blue " id="backUpBtn" onclick="runBackUp('')">开始备份</button>
-					<span id="BackupProgess"></span>
+					<form action="" class="form-horizontal form-row-seperated" method="post">
+						<div class="portlet">
+							<div class="portlet-title">
+								<div class="caption">
+									<i class="fa fa-edit"></i>内容设置
+								</div>
+								<div class="pull-right">
+									<button type="reset" class="btn default"><i class="fa fa-refresh"></i> 重置</button>
+									<button type="submit" class="btn green"><i class="fa fa-check-circle"></i> 保存</button>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="table-responsive">
+								<table class="table table-bordered">
+									<thead>
+										<tr role="row">
+											<th class="sorting_asc" width="50%">可配送区域</th>
+											<th class="sorting_asc" width="50%">运费(元)</th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody id="tbody">
+										
+									</tbody>
+								</table>
+							</div>
+							<a href="javascript:;" class="btn btn-default" id="addTr"><i class="fa fa-plus"></i> 添加区域</a>
+						</div>
+					</form>
+					
 				</div>
 			</div>
 		</div>
@@ -166,42 +197,30 @@ $(function() {
 	QuickSidebar.init(); // init quick sidebar
 	Demo.init(); // init demo features
 });
-//备份
-var progress=$("#BackupProgess"),
-	backUpBtn=$("#backUpBtn");
-function runBackUp(url){
-	var url=url;
-	backUpBtn.text('备份中...').removeClass("blue").addClass("disabled");
-	if(!url){
-		progress.html('正在备份第1卷，请勿进行其他页面操作。');
-		url="http://192.168.1.250/zzb_wap/testApi/backup.php?num=1";
-	}
-	new backUpAjax(url);
-}
-//备份请求
-function backUpAjax(url){
-	$.ajax({
-		url:url,
-		dataType: 'json',
-    	type: 'post',
-	}).done(function(data){
-		if(data.success==0){
-			//成功，继续分卷
-			setTimeout(function(){
-				progress.html('正在备份第'+data.num+'卷，请勿进行其他页面操作。');
-				new runBackUp(data.url);
-			},1000)
-		}else if(data.success==1){
-			//分卷结束
-			progress.html('<a href="'+data.downUrl+'">备份完毕，请点击本处下载</a>');
-			backUpBtn.text('开始备份').removeClass("disabled").addClass("blue");
-			$("#backUpTime").text(data.time);
-		}else if(data.success==2){
-			//失败
-			backUpBtn.text('开始备份').removeClass("disabled").addClass("blue");
-		}
+//增加TR
+var tbody=$("#tbody");
+var i=0;
+$("#addTr").click(function(){
+	tbody.find("tr").each(function(index,v){
+		var trI=$(v).data("id");
+		if(i<trI) i=trI;
 	})
-}
+	i++;
+	var str='';
+	str+='<tr data-id="'+i+'" class="gradeX odd" role="row">';
+	str+='<td><select name="province['+i+']" class="form-control"><option value="">请选择</option><option value="1">浙江</option><option value="2">上海</option></select></td>';
+	str+='<td><input type="text" class="form-control" name="freight['+i+']"></td>';
+	str+='<td><a href="javascript:;" class="del_tr btn red">删除</a></td>';
+	str+='</tr>';
+	tbody.append(str);
+})
+//删除tr
+$(document).on("click",'.del_tr',function(){
+	var tr = $(this).closest('tr');
+	if (confirm('确定删除？')){
+		tr.remove();
+	}
+})
 </script>
 <!-- END JAVASCRIPTS -->
 </body>
