@@ -1,0 +1,82 @@
+/*商品添加*/
+.prod_class_box{}
+.pord_class,.pord_add_class{
+	display: inline-block;
+	height:32px;
+	line-height: 32px;
+	padding:0px 7px;
+	i{color:#ddd;}
+	&:hover{
+		color:#fff;
+		i{color:#fff;}
+	}
+}
+.pord_class{
+	border:1px solid #e5e5e5;
+	margin-right:10px;
+	&:hover{
+		border:1px solid #c63927;
+		background:#c63927;
+	}
+	i{cursor:pointer;}
+}
+.pord_add_class{
+	border:1px dotted #e5e5e5;
+	cursor:pointer;
+	&:hover{
+		border:1px solid #2977f7;
+		background:#2977f7;
+	}
+}
+/*滚动条修改*/
+#prodClassTree{
+	height:350px;
+	overflow-y:scroll;
+	.jstree-themeicon{display:none;}
+	
+}
+#prodClassTree::-webkit-scrollbar {width: 8px}
+#prodClassTree::-webkit-scrollbar-track {
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+	-webikt-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3)
+}
+#prodClassTree::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	background: rgba(0, 0, 0, 0.5);
+	box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+	-webikt-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5)
+}
+#prodClassTree::-webkit-scrollbar-thumb:window-inactive {background: rgba(255, 0, 0, 0.4)}
+
+/*商品上传*/
+.handle_img{
+	list-style-type: none;
+	float: left;
+	width:200px;
+	border:1px solid #e5e5e5;
+	padding:10px;
+	margin-right:15px;
+	margin-bottom:15px;
+	background: #fff;
+	z-index: 10;
+	img{width:180px;height:180px;}
+}
+.handle_img_fun{
+	padding-top:10px;
+	overflow: hidden;
+	label{float:left;font-size: 12px}
+	.radio{padding-top:2px;}
+	button{float:right;}
+}
+#handleImgBox{
+	overflow: hidden;
+	margin-bottom: 20px;
+	min-height:300px;
+}

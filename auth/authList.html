@@ -180,15 +180,15 @@ $(function() {
 	Layout.init(); // init current layout
 	QuickSidebar.init(); // init quick sidebar
 	Demo.init(); // init demo features
-	$.ajax({
-	  url: '',
-	  type: 'POST',
-	  dataType: 'json',
-	  data: {id:123 },
-	}).done(function(data){
-		authList(data)
-	})
-	
+	// $.ajax({
+	//   url: '',
+	//   type: 'POST',
+	//   dataType: 'json',
+	//   data: {id:123 },
+	// }).done(function(data){
+	// 	authList(data.data);
+	// })
+	authList()
 });
 /*
 state
@@ -197,14 +197,16 @@ selected 选中
 
 */
 //加载权限
-function authList(data){
+function authList(){
 	$('#tree').jstree({
-	    'plugins': ["wholerow", "checkbox", "types"],
+	    'plugins': ["", "checkbox", "types"],
 	    'core': {
 	        "themes" : {
 	            "responsive": false
-	        },    
-	        'data': [{
+	        },
+	        //'data':data    
+	        'data': [
+	        	{
 	        		"id":"1",
 	                "text": "财务",
 	                "children": [
@@ -250,15 +252,28 @@ function authList(data){
 	}).on('changed.jstree', function(e, data) {
 		var arr= [];
 		for(var i = 0; i < data.selected.length; i++) {
-			var node = data.instance.get_node(data.selected[i]);
-			if (data.instance.is_leaf(node)) {
-				arr.push(node.id);
+			var node = data.instance.get_node(data.selected[i]),
+				len=node.parents.length-1
+			arr.push(node.id);
+			for(var j=0;j<len;j++){
+				arr.push(node.parents[j]);
 			}
 		}
+		arr=arr.unique();
 		$("#authId").val(arr)
 	});
 }
-
+Array.prototype.unique = function(){
+	var res = [],
+		json = {};
+	for(var i = 0; i < this.length; i++){
+		if(!json[this[i]]){
+			res.push(this[i]);
+			json[this[i]] = 1;
+		}
+	}
+	return res;
+}
 
 </script>
 <!-- END JAVASCRIPTS -->
