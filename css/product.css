@@ -88,14 +88,10 @@
   padding-top: 10px;
   overflow: hidden;
 }
-.handle_img_fun label {
+.handle_img_fun .handleDefault {
   float: left;
-  font-size: 12px;
 }
-.handle_img_fun .radio {
-  padding-top: 2px;
-}
-.handle_img_fun button {
+.handle_img_fun .handleDelImg {
   float: right;
 }
 #handleImgBox {
