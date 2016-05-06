@@ -1,6 +1,17 @@
 "use srtict";
 $(function() {
-    
+    $(".spec_select").select2();
+    //富文本绑定初始化
+    KindEditor.ready(function(K) {
+	    window.editor = K.create('.ke',{
+	        uploadJson:'/imageuc/kindeditor/upload?',
+	        resizeType :1,
+	        width:'100%',
+	        height:'300px',
+	        allowPreviewEmoticons : true,
+	        allowImageUpload : true,
+	    });	
+	});
 });
 //添加产品-商品分类相关
 var prodCLass=new Object();
@@ -68,114 +79,128 @@ prodCLass._show=function(arr){
 prodClass._del=function(id){
 	$.jstree.reference('#prodClassTree').deselect_node(id);
 }
+//规格相关
+var spec=new Object();
 /*
-	主图图片上传
+	添加规格
 */
-var uploader = new plupload.Uploader({
-    browse_button : 'handlePickfiles', 		//选择图片按钮
-    container: 'handleContainer', 		//图片容器
-    url : "../handleUp.php",		//上传地址
-    filters : {
-        max_file_size : '4mb',		//允许最大4M
-        mime_types: [
-            {title : "Image files", extensions : "jpg,gif,png"}
-        ]
-    },
-    init: {
-        PostInit: function(){
-            //开始上传
-            $('#handleUploadfiles').click(function() {
-                uploader.start();
-                return false;
-            });
-            //删除队列里的图片
-            var filelist=$('#handleFilelist');
-            filelist.html("");
-            filelist.on('click', '.added-files .remove', function(){
-                uploader.removeFile($(this).parent('.added-files').attr("id"));    
-                $(this).parent('.added-files').remove();                     
-            });
-			//绑定默认图片事件
-			var imgBox=$("#handleImgBox");
-			imgBox.on("click",".handleDefault",function(){
-				var _this=$(this),
-					id=_this.parents("li").data("imgid");
-				$.post("../success.php",{id:id}).done(function(data){
-					var data=eval("(" + data + ")");
-					if(data.success){
-						$(".handleDefault").removeClass("btn-success").html('设为默认图片');
-						_this.addClass('btn-success').html('默认图片');
-					}
-				})
-			})
-			//删除已经上传的图片
-			imgBox.on("click",".handleDelImg",function(){
-				var _this=$(this).parents("li"), 
-					id=_this.data("imgid");
-				$.post("../success.php",{id:id}).done(function(data){
-					var data=eval("(" + data + ")");
-					if(data.success){
-						_this.animate({opacity : 0},500,function(){
-				            _this.remove();
-				        });
-					}
-				})
-			})
-        },
-        //添加图片到上传队列
-        FilesAdded: function(up, files) {
-            plupload.each(files, function(file) {
-                $('#handleFilelist').append('<div class="alert alert-warning added-files" id="' + file.id + '">' + file.name + '(' + plupload.formatSize(file.size) + ') <span class="status label label-info"></span>&nbsp;<a href="javascript:;" style="margin-top:-5px" class="remove pull-right btn btn-sm red"><i class="fa fa-times"></i> 删除</a></div>');
-            });
-        },
-        //上传进度
-        UploadProgress: function(up, file) {
-            $('#' + file.id + ' > .status').html(file.percent + '%');
-        },
-       	//上传结果
-        FileUploaded: function(up, file, data) {
-            var response = $.parseJSON(data.response);
-            if (response.success==1) {
-                $('#' + file.id + ' > .status').removeClass("label-info").addClass("label-success").html('<i class="fa fa-check"></i> 上传成功')
-                $('#' + file.id + '').animate({opacity : 0},1000,function(){
-		            $('#' + file.id + '').remove();
-		        });
-		        //添加到图片框
-		        var str='';
-		        str+='<li class="handle_img" data-imgid="'+response.id+'">';
-				str+='<img src="'+response.url+'" draggable="false">';
-				str+='<div class="handle_img_fun">';
-				str+='<button type="button" class="btn btn-default btn-xs handleDefault"> 设为默认图片 </button>';
-				str+='<button type="button" class="btn btn-default btn-xs handleDelImg"><i class="fa fa-trash-o"></i> 删除 </button>';
-				str+='</div></li>';
-		        $("#handleImgBox").append($(str).hide().fadeIn(600));
-            } else if(response.success==2){
-                $('#' + file.id + ' > .status').removeClass("label-info").addClass("label-danger").html('<i class="fa fa-warning"></i> 只能上传3张图片');
-            }else{
+var specTable=$(".spec_table_box");
+var changeTime=$('.spec_add_class').daterangepicker({
+   	singleDatePicker: true,
+   	opens:'right'
+}); 
+changeTime.on('apply.daterangepicker', function(ev, picker) { 
+	var time=picker.startDate.format('YYYY-MM-DD'),
+		dome=specTable.children("div");
+	
+	if(dome.length>0){
+		var flag=true;
+		//对比当前已经添加的时间规格
+		specTable.children("div").each(function(k,v){
+			var dTime=$(v).attr("id");
+			dTime=dTime.replace('tab','');
+			if(dTime==time){
+				alert("该时间已添加");
+				flag=false;
+				return false;
+			}
+		});
+		if(flag) spec.add(time);
+	}else{
+		spec.add(time);
+	}
+	
+});
+spec.add=function(time){
+	var box=$(".spec_class_box ul"),
+		timeStr='',
+		//table='',
+		i=0;
+	//比较当前I的值
+	specTable.children("div").each(function(k,v){
+		var dI=$(v).data("tableid");
+		if(i<dI) i=dI;
+	});
+	i++;
+	$.ajax({
+		url:'../success.php',
+		type:'POST',
+		dataType:'json',
+		data:{
+			time:time,
+			i:i,
+		}
+	}).done(function(data){
+		if(data.success){
+			timeStr+='<li class="spec_class"><a href="#tab'+time+'" data-toggle="tab" aria-expanded="true">'+time+' <i class="fa fa-times" onclick=\'spec.del(this,"'+time+'")\'></i></a></li>';
+			box.append(timeStr);
+			specTable.append(data.html);
+			$('#tab'+time+'').find("select").select2();
+		}
+	})
+	// var tableTh='<thead><tr role="row"><th class="sorting_asc" width="150px">货号</th><th class="sorting_asc" width="200px">产品名 <button type="button" class="btn btn-default btn-xs pull-right" onclick=\'spec.addTr(this,"'+i+'")\'><i class="fa fa-plus"></i> 增加</button></th><th class="sorting_asc" width="200px">套餐</th><th class="sorting_asc" width="100px">售价</th><th class="sorting_asc" width="100px">成本价</th><th class="sorting_asc" width="100px">市场价</th><th class="sorting_asc" width="100px">库存</th></tr></thead>';
+	// timeStr+='<li class="spec_class"><a href="#tab'+time+'" data-toggle="tab" aria-expanded="true">'+time+' <i class="fa fa-times" onclick=\'spec.del(this,"'+time+'")\'></i></a></li>';
+	// table+='<div class="tab-pane fade" id="tab'+time+'" data-tableid="'+i+'"><table class="table table-bordered">'+tableTh;
+	// table+='<tbody><tr data-trid="1"><td rowspan="50"><input type="text" class="form-control input-sm" name="items['+i+'][art]"><input type="hidden" name="items['+i+'][time]" value="'+time+'"></td>';
+	// table+='<td><input type="text" class="form-control input-sm" name="items['+i+'][item_name][1]" value="成人"></td>';
+	// table+='<td><select class="form-control input-sm spec_select" name="items['+i+'][specval][1]"><option value="">请选择</option><option value="8">套餐8</option><option value="9">套餐9</option></select></td>';
+	// table+='<td><input type="text" class="form-control input-sm" name="items['+i+'][price][1]"></td>';
+	// table+='<td><input type="text" class="form-control input-sm" name="items['+i+'][cost_price][1]"></td>';
+	// table+='<td><input type="text" class="form-control input-sm" name="items['+i+'][mktprice][1]"></td>';
+	// table+='<td><input type="text" class="form-control input-sm" name="items['+i+'][stock][1]"></td></tr>';
+	// table+='<tr data-trid="2"><td><input type="text" class="form-control input-sm" name="items['+i+'][item_name][2]" value="儿童"></td>';
+	// table+='<td><select class="form-control input-sm spec_select" name="items['+i+'][specval][2]"><option value="">请选择</option><option value="8">套餐8</option><option value="9">套餐9</option></select></td>';
+	// table+='<td><input type="text" class="form-control input-sm" name="items['+i+'][price][2]"></td>';
+	// table+='<td><input type="text" class="form-control input-sm" name="items['+i+'][cost_price][2]"></td>';
+	// table+='<td><input type="text" class="form-control input-sm" name="items['+i+'][mktprice][2]"></td>';
+	// table+='<td><input type="text" class="form-control input-sm" name="items['+i+'][stock][2]"></td></tr>';
+	// table+='</tbody></table></div>';
+	// box.append(timeStr);
+	// specTable.append(table);
+	// $('#tab'+time+'').find("select").select2();
+}
 
-            }
-        },
-        Error: function(up, err) {
-            Metronic.alert({type: 'danger', message: err.message, closeInSeconds: 10, icon: 'warning'});
-        }
-    }
-});
-uploader.init();
 /*
-	拖动图片排序，并赋值
+	规格增加一行
 */
-$( "#handleImgBox").disableSelection();
-$("#handleImgBox").sortable({
-	opacity: 0.6, //设置拖动时候的透明度 
-    revert: true, //缓冲效果 
-    cursor: 'move', //拖动的时候鼠标样式 
-    update:function(){
-    	var _this=$(this),
-    		order=[];
-    	_this.children(".handle_img").each(function(i,v){
-    		order.push($(v).data("img"));
-    	})
-    	$("#prodImgs").val(order);
-    }
-});
+spec.addTr=function(e,num){
+	var box=$(e).parents('table').children('tbody'),
+		//str="",
+		i=2;
+	box.children("tr").each(function(j,v){
+		var tI=$(v).attr("trid");
+		if(i<tI) i=tI;
+	})
+	i++;
+	$.ajax({
+		url:'../success.php',
+		type:'POST',
+		dataType:'json',
+		data:{
+			num:num,
+			i:i,
+		}
+	}).done(function(data){
+		if(data.success){
+			box.append(data.html);
+			$('tr[data-trid="'+i+'"]').find("select").select2();
+		}
+	})
+	// str+='<tr data-trid="'+i+'"><td><input type="text" class="form-control input-sm" name="items['+num+'][item_name]['+i+']" value=""></td>';
+	// str+='<td><select class="form-control input-sm spec_select" name="items['+num+'][specval]['+i+']"><option value="">请选择</option><option value="8">套餐8</option><option value="9">套餐9</option></select></td>';
+	// str+='<td><input type="text" class="form-control input-sm" name="items['+num+'][price]['+i+']"></td>';
+	// str+='<td><input type="text" class="form-control input-sm" name="items['+num+'][cost_price]['+i+']"></td>';
+	// str+='<td><input type="text" class="form-control input-sm" name="items['+num+'][mktprice]['+i+']"></td>';
+	// str+='<td><input type="text" class="form-control input-sm" name="items['+num+'][stock]['+i+']"></td></tr>';
+	// box.append(str);
+	// $('tr[data-trid="'+i+'"]').find("select").select2();
+}
+/*
+	删除规格
+*/
+spec.del=function(e,id){
+	$('#tab'+id+'').remove();
+	$(e).parent().parent().remove();
+}
+
 

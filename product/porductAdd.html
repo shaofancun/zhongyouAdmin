@@ -30,11 +30,13 @@
 <!-- END PAGE STYLES -->
 <!-- BEGIN THEME STYLES -->
 <!-- DOC: To use 'rounded corners' style just load 'components-rounded.css' stylesheet instead of 'components.css' in the below style tag -->
+<link rel="stylesheet" href="../static/style/default/mix/metronic3.6/theme/assets/global/plugins/select2/select2.css">
 <link href="../static/style/default/mix/metronic3.6/theme/assets/global/css/components.css" id="style_components" rel="stylesheet" type="text/css"/>
 <link href="../static/style/default/mix/metronic3.6/theme/assets/global/css/plugins.css" rel="stylesheet" type="text/css"/>
 <link href="../static/style/default/mix/metronic3.6/theme/assets/admin/layout/css/layout.css" rel="stylesheet" type="text/css"/>
 <link href="../static/style/default/mix/metronic3.6/theme/assets/admin/layout/css/themes/darkblue.css" rel="stylesheet" type="text/css" id="style_color"/>
 <link href="../static/style/default/mix/metronic3.6/theme/assets/admin/layout/css/custom.css" rel="stylesheet" type="text/css"/>
+<link href="../static/style/default/mix/metronic3.6/theme/assets/global/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css"/>
 <link rel="stylesheet" href="../css/product.min.css" />
 <!-- END THEME STYLES -->
 <link rel="shortcut icon" href="favicon.ico"/>
@@ -51,7 +53,7 @@
 		<div class="hor-menu hor-menu-light hidden-sm hidden-xs">
 			<ul class="nav navbar-nav">
 				<li class="classic-menu-dropdown"><a href="../index.html">首页</a></li>
-                <li class="classic-menu-dropdown active"><a href="">商品</a></li>
+                <li class="classic-menu-dropdown active"><a href="../product/porductList.html">商品</a></li>
 				<li class="classic-menu-dropdown"><a href="../finance/detailsList.html">财务</a></li>
 				<li class="classic-menu-dropdown"><a href="../statistics/orderSales.html">统计</a></li>
 				<li class="classic-menu-dropdown"><a href="../user/levelList.html">会员</a></li>
@@ -73,7 +75,8 @@
 				<li class="active open">
 					<a href="javascript:;"><i class="icon-basket "></i><span class="title">商品管理</span><span class="selected"></span><span class="arrow"></span></a>
 					<ul class="sub-menu">
-						<li class="active"><a href="../product/addPorduct.html">添加商品</a></li>
+						<li><a href="../product/porductList.html">商品列表</a></li>
+						<li class="active"><a href="../product/porductAdd.html">添加商品</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -97,7 +100,7 @@
 			<!--表单-->
 			<div class="row">
 				<div class="col-md-12">
-					<form method="post" class="form-horizontal form-row-seperated" action="" novalidate>
+					<form method="post" class="form-horizontal form-row-seperated form" action="../a.php">
                     	<div class="portlet">
 							<div class="portlet-title">
 								<div class="caption">
@@ -111,12 +114,18 @@
 							</div>
 						</div>
                         <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" class="active"><a href="#base_pane" aria-controls="base_pane" role="tab" data-toggle="tab">基本信息</a></li>
-                            <li role="presentation"><a href="#image_pane" aria-controls="image_pane" role="tab" data-toggle="tab">主图</a></li>
+                            <li role="presentation" class="active"><a href="#basePane" aria-controls="basePane" role="tab" data-toggle="tab">基本信息</a></li>
+                            <li role="presentation"><a href="#tripPane" aria-controls="tripPane" role="tab" data-toggle="tab">行程</a></li>
+                            <li role="presentation"><a href="#scPane" aria-controls="scPane" role="tab" data-toggle="tab">产品特色</a></li>
+                            <li role="presentation"><a href="#costPane" aria-controls="costPane" role="tab" data-toggle="tab">须知费用</a></li>
+                            <!-- <li role="presentation"><a href="#planePane" aria-controls="planePane" role="tab" data-toggle="tab">机票信息</a></li>
+                            <li role="presentation"><a href="#contractPane" aria-controls="contractPane" role="tab" data-toggle="tab">合同</a></li>
+                            <li role="presentation"><a href="#insurancePane" aria-controls="insurancePane" role="tab" data-toggle="tab">保险</a></li> -->
+                            <li role="presentation"><a href="#searchPane" aria-controls="searchPane" role="tab" data-toggle="tab">搜索相关</a></li>
                         </ul>
                         <div class="tab-content">
                         	<!--基本信息form-->
-                        	<div role="tabpanel" class="tab-pane active" id="base_pane">
+                        	<div role="tabpanel" class="tab-pane active" id="basePane">
                             	<div class="form-body">
                             		<!--商品分类-->
                             		<input type="hidden" name="prodClass" id="prodClass" value="" placeholder="已经添加的商品分类">
@@ -136,9 +145,7 @@
 													<h4 class="modal-title">选择分类</h4>
 												</div>
 												<div class="modal-body">
-													<div id="prodClassTree">
-														
-													</div>
+													<div id="prodClassTree"></div>
 												</div>
 												<div class="modal-footer">
 													<button type="button" class="btn green" data-dismiss="modal">确定</button>
@@ -151,12 +158,6 @@
                                     	<label class="col-md-2 control-label">标题：</label>
                                         <div class="col-md-6">
                                             <input type="text" class="form-control" name="name" placeholder="商品标题">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                    	<label class="col-md-2 control-label">描述：</label>
-                                        <div class="col-md-6">
-                                            <textarea class="form-control" name="describe" placeholder="商品描述" rows="4"></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -198,95 +199,92 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!--出行日期表格-->
+                                    <!--规格-->
                                     <div class="form-group">
-										<label class="control-label col-md-2">出行日期：</label>
-										<div class="col-md-10">
-                                        	<a href="javascript:;" class="btn green" id="travelAddBtn">新增日期  <i class="fa fa-plus"></i></a>
-											<div class="dataTables_wrapper no-footer" id="sample_1_wrapper">
-												<div class="table-scrollable">
-													<table class="table table-bordered table-hover">
-														<thead>
-															<tr role="row">
-																<th width="30"></th>
-																<th width="250">日期</th>
-																<th width="150">成人/儿童</th>
-																<th width="150">销售价（元）</th>
-																<th width="150">市场价（元）</th>
-																<th width="150">成本价（元）</th>
-																<th width="150">库存</th>
-																<th>操作</th>
-															</tr>
-														</thead>
-														<tbody id="travelAddTbody">
-															<tr>
-																<td rowspan="2"><input type="checkbox" class="group-checkable checkbox"></td>
-																<td></td>
-																<td>儿童</td>
-																<td>3</td>
-																<td>4</td>
-																<td>5</td>
-																<td>6</td>
-																<td rowspan="2"><a href="javascript:;" class="btn btn-default" id="travelAllDel">删除 <i class="fa fa fa-times"></i></a></td>
-															</tr>
-															<tr>
-																<td></td>
-																<td>成人</td>
-																<td>3</td>
-																<td>4</td>
-																<td>5</td>
-																<td>6</td>
-															</tr>
-														</tbody>
-														<tbody style="border-top:none">
-															<tr>
-																<td colspan="8">
-																	<input type="checkbox" class="group-checkable checkbox" id="travelAllcheck">&nbsp;
-																	<a href="javascript:;" class="btn red btn-sm" id="travelAllDel">删除勾选项</a>
-																</td>
-															</tr>
-														</tbody>
-													</table>
-												</div>
-											</div>
-										</div>
-									</div>
-									<!--出行日期表格 /-->
+                                    	<label class="col-md-2 control-label">规格：</label>
+                                        <div class="col-md-10">
+                                        	<div class="form-control-static spec_class_box">
+                                        		<ul>
+                                        			
+                                        		</ul>
+                                            </div>
+                                            <div class="spec_add_class">新增行程日期 <i class="fa fa-calendar"></i></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                    	<label class="col-md-2 control-label"></label>
+                                        <div class="col-md-10">
+                                        	<div class="tab-content spec_table_box"></div>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="specItems" id="specItems">
+									<!--规格 /-->
+									<div class="form-group">
+                                    	<label class="col-md-2 control-label">补差价提示：</label>
+                                        <div class="col-md-6">
+                                            <textarea class="form-control" name="extra" placeholder="补差价提示信息" rows="4"></textarea>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <!--基本信息form /-->
-                            <!--图片信息form-->
-                        	<div role="tabpanel" class="tab-pane " id="image_pane">
-								<div id="handleContainer" class="margin-bottom-10">
-									<a id="handlePickfiles" href="javascript:;" class="btn yellow"><i class="fa fa-plus"></i> 选择图片 </a>
-									<a id="handleUploadfiles" href="javascript:;" class="btn green"><i class="fa fa-share"></i> 上传图片 </a>
-									<input type="hidden" name="prodImgs" id="prodImgs" value="" placeholder="图片排序">
-								</div>
-								<div class="row">
-									<div id="handleFilelist" class="col-md-6 col-sm-12"></div>
-								</div>
-								<!--图片容器-->
-								<div class="row">
-									<ul class="col-sm-12" id="handleImgBox">
-									
-									</ul>
-								</div>
-								<!--图片容器 /-->
-								<div class="panel panel-success">
-									<div class="panel-heading">
-										<h3 class="panel-title">温馨提示</h3>
-									</div>
-									<div class="panel-body">
-										<ul>
-											<li>图片只允许上传3张。</li>
-											<li>上传的图片不能超过4M。</li>
-											<li>只允许上传(jpg,jpng,gif,png)格式的图片。</li>
-										</ul>
-									</div>
-								</div>
-                        	</div>
-                            <!--图片信息form /-->
+                           	<!--产品特色-->
+                           	<div role="tabpanel" class="tab-pane" id="scPane">
+								<div class="form-group">
+                                	<label class="col-md-2 control-label">产品特色：</label>
+                                    <div class="col-md-6">
+                                        <textarea class="form-control ke" name="scText"></textarea>
+                                    </div>
+                                </div>
+                           	</div>
+                           	<!--产品特色 /-->
+                           	<!--须知费用-->
+                           	<div role="tabpanel" class="tab-pane" id="costPane">
+								<div class="form-group">
+                                	<label class="col-md-2 control-label">须知费用：</label>
+                                    <div class="col-md-6">
+                                        <textarea class="form-control ke" name="noticeText"></textarea>
+                                    </div>
+                                </div>
+                           	</div>
+                           	<!--须知费用 /-->
+                           	<!--机票信息-->
+                           	<div role="tabpanel" class="tab-pane" id="planePane">6</div>
+                           	<!--机票信息 /-->
+                           	<!--合同-->
+                           	<div role="tabpanel" class="tab-pane" id="contractPane">7</div>
+                           	<!--合同 /-->
+                           	<!--保险-->
+                           	<div role="tabpanel" class="tab-pane" id="insurancePane">8</div>
+                           	<!--保险 /-->
+                           	<!--搜索相关-->
+                           	<div role="tabpanel" class="tab-pane" id="searchPane">
+								<div class="form-group">
+                                	<label class="col-md-2 control-label">标题：</label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" name="" placeholder="标题：">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                	<label class="col-md-2 control-label">关键字：</label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" name="keyword" placeholder="关键字">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                	<label class="col-md-2 control-label">描述：</label>
+                                    <div class="col-md-6">
+                                        <textarea class="form-control" name="describe" placeholder="描述" rows="4"></textarea>
+                                    </div>
+                                </div>
+                           	</div>
+                           	<!--搜索相关 /-->
                         </div>
+                        <!--下一步-->
+						<div class="form-actions">
+							
+						</div>
+						<!--下一步-->
                     </form>
 				</div>
 			</div>
@@ -328,6 +326,11 @@
 <script type="text/javascript" src="../static/style/default/mix/metronic3.6/theme/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 <script src="../static/style/default/mix/metronic3.6/theme/assets/global/plugins/jstree/dist/jstree.min.js"></script>
 <script src="../static/style/default/mix/metronic3.6/theme/assets/global/plugins/plupload/js/plupload.full.min.js"></script>
+<script src="../static/style/default/mix/metronic3.6/theme/assets/global/plugins/bootstrap-daterangepicker/moment.min.js" type="text/javascript"></script>
+<script src="../static/style/default/mix/metronic3.6/theme/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.js" type="text/javascript"></script>
+<script src="../static/style/default/js/lib/kindeditor/kindeditor-all-min.js"></script>
+<script src="../static/style/default/js/lib/kindeditor/lang/zh_CN.js"></script>
+
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="../static/style/default/mix/metronic3.6/theme/assets/global/scripts/metronic.js" type="text/javascript"></script>

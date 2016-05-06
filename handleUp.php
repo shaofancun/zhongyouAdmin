@@ -1,5 +1,5 @@
 <?php
-// var_dump($_FILES);
+// var_dump($_POST);
 // exit();
 $time=rand(1,99999);
 $filename="aaa".$time.".jpg";
