@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<!--
+        添加规格
+        传入两个参数 
+        time  时间
+        i  序号
+    -->
+    
+    <div class="tab-pane fade" id="tab'+time+'" data-tableid="'+i+'">
+      <table class="table table-bordered">
+        <thead>
+          <tr role="row">
+            <th class="sorting_asc" width="150px">货号</th>
+            <th class="sorting_asc" width="200px">产品名
+              <button type="button" class="btn btn-default btn-xs pull-right" onclick="spec.addTr(this,'+i+')"><i class="fa fa-plus"></i> 增加</button></th>
+            <th class="sorting_asc" width="200px">套餐</th>
+            <th class="sorting_asc" width="100px">售价</th>
+            <th class="sorting_asc" width="100px">成本价</th>
+            <th class="sorting_asc" width="100px">市场价</th>
+            <th class="sorting_asc" width="100px">库存</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr data-trid="1">
+            <td rowspan="50">
+                <input type="text" class="form-control input-sm" name="items['+i+'][art]">
+                <input type="hidden" name="items['+i+'][time]" value="'+time+'">
+            </td>
+            <td><input type="text" class="form-control input-sm" name="items['+i+'][item_name][1]" value="成人"></td>
+            <td><select class="form-control input-sm spec_select" name="items['+i+'][specval][1]"></select></td>
+            <td><input type="text" class="form-control input-sm" name="items['+i+'][price][1]"></td>
+            <td><input type="text" class="form-control input-sm" name="items['+i+'][cost_price][1]"></td>
+            <td><input type="text" class="form-control input-sm" name="items['+i+'][mktprice][1]"></td>
+            <td><input type="text" class="form-control input-sm" name="items['+i+'][stock][1]"></td>
+          </tr>
+          <tr data-trid="2">
+            <td><input type="text" class="form-control input-sm" name="items['+i+'][item_name][2]" value="儿童"></td>
+            <td><select class="form-control input-sm spec_select" name="items['+i+'][specval][2]"></select></td>
+            <td><input type="text" class="form-control input-sm" name="items['+i+'][price][2]"></td>
+            <td><input type="text" class="form-control input-sm" name="items['+i+'][cost_price][2]"></td>
+            <td><input type="text" class="form-control input-sm" name="items['+i+'][mktprice][2]"></td>
+            <td><input type="text" class="form-control input-sm" name="items['+i+'][stock][2]"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!--
+        添加行
+        传入两个参数 
+        num  父节点序号
+        i  序号
+    -->
+    <tr data-trid="'+i+'">
+      <td><input type="text" class="form-control input-sm" name="items['+num+'][item_name]['+i+']" value=""></td>
+      <td><select class="form-control input-sm spec_select" name="items['+num+'][specval]['+i+']"></select></td>
+      <td><input type="text" class="form-control input-sm" name="items['+num+'][price]['+i+']"></td>
+      <td><input type="text" class="form-control input-sm" name="items['+num+'][cost_price]['+i+']"></td>
+      <td><input type="text" class="form-control input-sm" name="items['+num+'][mktprice]['+i+']"></td>
+      <td><input type="text" class="form-control input-sm" name="items['+num+'][stock]['+i+']"></td>
+    </tr>
+</body>
+</html>
+
+
+
+<input type="hidden" id="tripId" name="tripId" value="">
+<div class="form-group">
+  <label class="col-md-2 control-label">序号：</label>
+    <div class="col-md-3">
+      <div class="input-group">
+        <span class="input-group-addon">第</span>
+        <input type="text" class="form-control" id="editNum" name="editNum">
+        <span class="input-group-addon">天</span>
+      </div>
+    </div>
+</div>
+<div class="form-group">
+  <label class="col-md-2 control-label">标题：</label>
+    <div class="col-md-8">
+        <input type="text" class="form-control" id="editName" name="editName" placeholder="行程标题">
+    </div>
+</div>
+<div class="form-group">
+  <label class="col-md-2 control-label">摘要：</label>
+    <div class="col-md-8">
+        <textarea class="form-control" id="editExplain" name="editExplain" placeholder="摘要" rows="4"></textarea>
+    </div>
+</div>
+<div class="form-group">
+  <label class="col-md-2 control-label">详细行程：</label>
+    <div class="col-md-8">
+        <textarea class="form-control ke" id="editDetailed" name="editDetailed"></textarea>
+    </div>
+</div>
+<div class="form-group">
+  <label class="col-md-2 control-label"></label>
+    <div class="col-md-8">
+      <div id="tripPickfiles" class="trip_up">&nbsp;</div>
+        <div class="form-control-static trip_img_box">
+        </div>
+    </div>
+</div>

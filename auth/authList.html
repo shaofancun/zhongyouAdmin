@@ -126,6 +126,39 @@ License: You must have a valid license purchased only from themeforest(the above
 					</div>
 				</form>
 				<div class="portlet-body">
+					<!-- <div class="table-scrollable">
+						<table class="table table-bordered table-hover">
+							<thead>
+								<tr>
+									<th width="60%">名称</th>
+									<th width="20%">类型</th>
+									<th width="20%">操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>商品</td>
+									<td><span class="text-success">开启</span></td>
+									<td><a href="javascript:;" class="btn red btn-xs" onclick="auth.close(1)">关闭</a></td>
+								</tr>
+								<tr>
+									<td>├ 商品管理</td>
+									<td><span class="text-success">开启</span></td>
+									<td><a href="javascript:;" class="btn red btn-xs" onclick="auth.close(1)">关闭</a></td>
+								</tr>
+								<tr>
+									<td>│    ├  商品列表</td>
+									<td><span class="text-success">开启</span></td>
+									<td><a href="javascript:;" class="btn red btn-xs" onclick="auth.close(1)">关闭</a></td>
+								</tr>
+								<tr>
+									<td>│    ├  添加商品</td>
+									<td><span class="text-default">关闭</span></td>
+									<td><a href="javascript:;" class="btn green btn-xs" onclick="auth.open(1)">开启</a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div> -->
 					<div id="tree" class="tree-demo">
 						
 					</div>
@@ -249,31 +282,29 @@ function authList(){
 	            "icon" : "fa fa-file icon-state-warning icon-lg"
 	        }
 	    }
-	}).on('changed.jstree', function(e, data) {
-		var arr= [];
-		for(var i = 0; i < data.selected.length; i++) {
-			var node = data.instance.get_node(data.selected[i]),
-				len=node.parents.length-1
-			arr.push(node.id);
-			for(var j=0;j<len;j++){
-				arr.push(node.parents[j]);
-			}
-		}
-		arr=arr.unique();
-		$("#authId").val(arr)
-	});
+	})
+	.bind('click.jstree', function(event) {               
+        var eventNodeName = event.target.nodeName,
+        	id;     
+        if(eventNodeName == 'INS') {  
+            return;               
+        }else if(eventNodeName == 'I'){
+        	if($(event.target).hasClass('jstree-checkbox')){
+        		var $subject = $(event.target).parent(); 
+                id=$(event.target).parents('li').attr('id');     
+                ajaxAuth(id);             
+        	}  
+        }else if (eventNodeName == 'A') {                   
+            var $subject = $(event.target).parent();   
+            id=$subject.attr('id'); 
+            ajaxAuth(id);            
+        }
+        function ajaxAuth(id){
+        	console.log(id);
+        }
+    })
 }
-Array.prototype.unique = function(){
-	var res = [],
-		json = {};
-	for(var i = 0; i < this.length; i++){
-		if(!json[this[i]]){
-			res.push(this[i]);
-			json[this[i]] = 1;
-		}
-	}
-	return res;
-}
+
 
 </script>
 <!-- END JAVASCRIPTS -->
