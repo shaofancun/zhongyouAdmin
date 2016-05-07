@@ -91,6 +91,7 @@ var spec=new Object();
 */
 var specTable=$(".spec_table_box");
 var changeTime=$('.spec_add_class').daterangepicker({
+	language:'en', 
    	singleDatePicker: true,
    	opens:'right'
 }); 
@@ -119,7 +120,7 @@ changeTime.on('apply.daterangepicker', function(ev, picker) {
 spec.add=function(time){
 	var box=$(".spec_class_box ul"),
 		timeStr='',
-		//table='',
+		table='',
 		i=0;
 	//比较当前I的值
 	specTable.children("div").each(function(k,v){
@@ -127,42 +128,42 @@ spec.add=function(time){
 		if(i<dI) i=dI;
 	});
 	i++;
-	$.ajax({
-		url:'../success.php',
-		type:'POST',
-		dataType:'json',
-		data:{
-			time:time,
-			i:i,
-		}
-	}).done(function(data){
-		if(data.success){
-			timeStr+='<li class="spec_class"><a href="#tab'+time+'" data-toggle="tab" aria-expanded="true">'+time+' <i class="fa fa-times" onclick=\'spec.del(this,"'+time+'")\'></i></a></li>';
-			box.append(timeStr);
-			specTable.append(data.html);
-			$('#tab'+time+'').find("select").select2();
-		}
-	})
-	// var tableTh='<thead><tr role="row"><th class="sorting_asc" width="150px">货号</th><th class="sorting_asc" width="200px">产品名 <button type="button" class="btn btn-default btn-xs pull-right" onclick=\'spec.addTr(this,"'+i+'")\'><i class="fa fa-plus"></i> 增加</button></th><th class="sorting_asc" width="200px">套餐</th><th class="sorting_asc" width="100px">售价</th><th class="sorting_asc" width="100px">成本价</th><th class="sorting_asc" width="100px">市场价</th><th class="sorting_asc" width="100px">库存</th></tr></thead>';
-	// timeStr+='<li class="spec_class"><a href="#tab'+time+'" data-toggle="tab" aria-expanded="true">'+time+' <i class="fa fa-times" onclick=\'spec.del(this,"'+time+'")\'></i></a></li>';
-	// table+='<div class="tab-pane fade" id="tab'+time+'" data-tableid="'+i+'"><table class="table table-bordered">'+tableTh;
-	// table+='<tbody><tr data-trid="1"><td rowspan="50"><input type="text" class="form-control input-sm" name="items['+i+'][art]"><input type="hidden" name="items['+i+'][time]" value="'+time+'"></td>';
-	// table+='<td><input type="text" class="form-control input-sm" name="items['+i+'][item_name][1]" value="成人"></td>';
-	// table+='<td><select class="form-control input-sm spec_select" name="items['+i+'][specval][1]"><option value="">请选择</option><option value="8">套餐8</option><option value="9">套餐9</option></select></td>';
-	// table+='<td><input type="text" class="form-control input-sm" name="items['+i+'][price][1]"></td>';
-	// table+='<td><input type="text" class="form-control input-sm" name="items['+i+'][cost_price][1]"></td>';
-	// table+='<td><input type="text" class="form-control input-sm" name="items['+i+'][mktprice][1]"></td>';
-	// table+='<td><input type="text" class="form-control input-sm" name="items['+i+'][stock][1]"></td></tr>';
-	// table+='<tr data-trid="2"><td><input type="text" class="form-control input-sm" name="items['+i+'][item_name][2]" value="儿童"></td>';
-	// table+='<td><select class="form-control input-sm spec_select" name="items['+i+'][specval][2]"><option value="">请选择</option><option value="8">套餐8</option><option value="9">套餐9</option></select></td>';
-	// table+='<td><input type="text" class="form-control input-sm" name="items['+i+'][price][2]"></td>';
-	// table+='<td><input type="text" class="form-control input-sm" name="items['+i+'][cost_price][2]"></td>';
-	// table+='<td><input type="text" class="form-control input-sm" name="items['+i+'][mktprice][2]"></td>';
-	// table+='<td><input type="text" class="form-control input-sm" name="items['+i+'][stock][2]"></td></tr>';
-	// table+='</tbody></table></div>';
-	// box.append(timeStr);
-	// specTable.append(table);
-	// $('#tab'+time+'').find("select").select2();
+	// $.ajax({
+	// 	url:'../success.php',
+	// 	type:'POST',
+	// 	dataType:'json',
+	// 	data:{
+	// 		time:time,
+	// 		i:i,
+	// 	}
+	// }).done(function(data){
+	// 	if(data.success){
+	// 		timeStr+='<li class="spec_class"><a href="#tab'+time+'" data-toggle="tab" aria-expanded="true">'+time+' <i class="fa fa-times" onclick=\'spec.del(this,"'+time+'")\'></i></a></li>';
+	// 		box.append(timeStr);
+	// 		specTable.append(data.html);
+	// 		$('#tab'+time+'').find("select").select2();
+	// 	}
+	// })
+	var tableTh='<thead><tr role="row"><th class="sorting_asc" width="150px">货号</th><th class="sorting_asc" width="200px">产品名 <button type="button" class="btn btn-default btn-xs pull-right" onclick=\'spec.addTr(this,"'+i+'")\'><i class="fa fa-plus"></i> 增加</button></th><th class="sorting_asc" width="200px">套餐</th><th class="sorting_asc" width="100px">售价</th><th class="sorting_asc" width="100px">成本价</th><th class="sorting_asc" width="100px">市场价</th><th class="sorting_asc" width="100px">库存</th></tr></thead>';
+	timeStr+='<li class="spec_class"><a href="#tab'+time+'" data-toggle="tab" aria-expanded="true">'+time+' <i class="fa fa-times" onclick=\'spec.del(this,"'+time+'")\'></i></a></li>';
+	table+='<div class="tab-pane fade" id="tab'+time+'" data-tableid="'+i+'"><table class="table table-bordered">'+tableTh;
+	table+='<tbody><tr data-trid="1"><td rowspan="2"><input type="text" class="form-control input-sm" name="items['+i+'][art]"><input type="hidden" name="items['+i+'][time]" value="'+time+'"></td>';
+	table+='<td><input type="text" class="form-control input-sm" name="items['+i+'][item_name][1]" value="成人"></td>';
+	table+='<td><select class="form-control input-sm spec_select" name="items['+i+'][specval][1]"><option value="">请选择</option><option value="8">套餐8</option><option value="9">套餐9</option></select></td>';
+	table+='<td><input type="text" class="form-control input-sm" name="items['+i+'][price][1]"></td>';
+	table+='<td><input type="text" class="form-control input-sm" name="items['+i+'][cost_price][1]"></td>';
+	table+='<td><input type="text" class="form-control input-sm" name="items['+i+'][mktprice][1]"></td>';
+	table+='<td><input type="text" class="form-control input-sm" name="items['+i+'][stock][1]"></td></tr>';
+	table+='<tr data-trid="2"><td><input type="text" class="form-control input-sm" name="items['+i+'][item_name][2]" value="儿童"></td>';
+	table+='<td><select class="form-control input-sm spec_select" name="items['+i+'][specval][2]"><option value="">请选择</option><option value="8">套餐8</option><option value="9">套餐9</option></select></td>';
+	table+='<td><input type="text" class="form-control input-sm" name="items['+i+'][price][2]"></td>';
+	table+='<td><input type="text" class="form-control input-sm" name="items['+i+'][cost_price][2]"></td>';
+	table+='<td><input type="text" class="form-control input-sm" name="items['+i+'][mktprice][2]"></td>';
+	table+='<td><input type="text" class="form-control input-sm" name="items['+i+'][stock][2]"></td></tr>';
+	table+='</tbody></table></div>';
+	box.append(timeStr);
+	specTable.append(table);
+	$('#tab'+time+'').find("select").select2();
 }
 
 /*
@@ -170,35 +171,37 @@ spec.add=function(time){
 */
 spec.addTr=function(e,num){
 	var box=$(e).parents('table').children('tbody'),
-		//str="",
+		tdRow=box.find("td").eq(0),
+		str="",
 		i=2;
 	box.children("tr").each(function(j,v){
 		var tI=$(v).data("trid");
 		if(i<tI) i=tI;
 	})
 	i++;
-	$.ajax({
-		url:'../success.php',
-		type:'POST',
-		dataType:'json',
-		data:{
-			num:num,
-			i:i,
-		}
-	}).done(function(data){
-		if(data.success){
-			box.append(data.html);
-			$('tr[data-trid="'+i+'"]').find("select").select2();
-		}
-	})
-	// str+='<tr data-trid="'+i+'"><td><input type="text" class="form-control input-sm" name="items['+num+'][item_name]['+i+']" value=""></td>';
-	// str+='<td><select class="form-control input-sm spec_select" name="items['+num+'][specval]['+i+']"><option value="">请选择</option><option value="8">套餐8</option><option value="9">套餐9</option></select></td>';
-	// str+='<td><input type="text" class="form-control input-sm" name="items['+num+'][price]['+i+']"></td>';
-	// str+='<td><input type="text" class="form-control input-sm" name="items['+num+'][cost_price]['+i+']"></td>';
-	// str+='<td><input type="text" class="form-control input-sm" name="items['+num+'][mktprice]['+i+']"></td>';
-	// str+='<td><input type="text" class="form-control input-sm" name="items['+num+'][stock]['+i+']"></td></tr>';
-	// box.append(str);
-	// $('tr[data-trid="'+i+'"]').find("select").select2();
+	// $.ajax({
+	// 	url:'../success.php',
+	// 	type:'POST',
+	// 	dataType:'json',
+	// 	data:{
+	// 		num:num,
+	// 		i:i,
+	// 	}
+	// }).done(function(data){
+	// 	if(data.success){
+	// 		box.append(data.html);
+	// 		$('tr[data-trid="'+i+'"]').find("select").select2();
+	// 	}
+	// })
+	str+='<tr data-trid="'+i+'"><td><input type="text" class="form-control input-sm" name="items['+num+'][item_name]['+i+']" value=""></td>';
+	str+='<td><select class="form-control input-sm spec_select" name="items['+num+'][specval]['+i+']"><option value="">请选择</option><option value="8">套餐8</option><option value="9">套餐9</option></select></td>';
+	str+='<td><input type="text" class="form-control input-sm" name="items['+num+'][price]['+i+']"></td>';
+	str+='<td><input type="text" class="form-control input-sm" name="items['+num+'][cost_price]['+i+']"></td>';
+	str+='<td><input type="text" class="form-control input-sm" name="items['+num+'][mktprice]['+i+']"></td>';
+	str+='<td><input type="text" class="form-control input-sm" name="items['+num+'][stock]['+i+']"></td></tr>';
+	tdRow.attr("rowspan",parseInt(tdRow.attr("rowspan"))+1);
+	box.append(str);
+	$('tr[data-trid="'+i+'"]').find("select").select2();
 }
 /*
 	删除规格
