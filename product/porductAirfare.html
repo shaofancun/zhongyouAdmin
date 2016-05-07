@@ -113,51 +113,129 @@
 							</div>
 						</div>
                         <div class="tab-content">
-							<div class="portlet-body">
-								<div class="table-toolbar">
-									<div class="row">
-										<div class="col-md-6">
-											<button type="button" class="btn green" data-toggle="modal" href="#addTripForm">新增 <i class="fa fa-plus"></i></button>
-										</div>
-									</div>
-								</div>
-								<div class="dataTables_wrapper no-footer" id="sample_1_wrapper">
-									<div class="table-scrollable">
-										<table class="table table-striped table-bordered table-hover dataTable no-footer" role="grid" aria-describedby="sample_1_info">
-											<thead>
-												<tr role="row">
-													<th width="80">天数</th>
-													<th width="200">标题</th>
-													<th width="400">摘要</th>
-													<th>操作</th>
-												</tr>
-											</thead>
-											<tbody id="tripBox">
-												<tr data-tripid="1"> 
-													<td>第1天</td>
-													<td>普通会员</td>
-													<td>普通用户</td>
-													<td>
-														<a href="javascript:;" class="btn green btn-sm edit">编辑 <i class="glyphicon glyphicon-edit"></i></a>
-														<a href="javascript:;" class="btn default btn-sm del">删除 <i class="glyphicon glyphicon-remove"></i></a>	
-													</td>
-												</tr>
-												<tr data-tripid="2"> 
-													<td>第2天</td>
-													<td>普通会员</td>
-													<td>普通用户</td>
-													<td>
-														<a href="javascript:;" class="btn green btn-sm edit">编辑 <i class="glyphicon glyphicon-edit"></i></a>
-														<a href="javascript:;" class="btn default btn-sm del">删除 <i class="glyphicon glyphicon-remove"></i></a>	
-													</td>
-												</tr>
-											</tbody>
-										</table>
+							<!--工具-->
+							<div class="table-toolbar">
+								<div class="row">
+									<div class="col-md-6">
+										<button type="button" class="btn green" data-toggle="modal" href="#addFly">新增 <i class="fa fa-plus"></i></button>
 									</div>
 								</div>
 							</div>
-							<!--增加行程form框-->
-							<div class="modal fade bs-modal-lg" id="addTripForm" tabindex="-1" role="basic" aria-hidden="true">
+							<!--去程航班-->
+							<div class="portlet box yellow-crusta">
+								<div class="portlet-title">
+									<div class="caption">去程航班</div>
+									<div class="tools"><a href="javascript:;" class="collapse" data-original-title="收缩" title=""></a></div>
+								</div>
+								<div class="portlet-body">
+									<!--表格-->
+									<div class="dataTables_wrapper no-footer">
+										<div class="table-scrollable" style="overflow-x:inherit;overflow-y:inherit;">
+											<table class="table table-bordered table-hover" id="flyGo">
+												<thead>
+													<tr role="row">
+														<th width="200">航空公司</th>
+														<th width="150">航班</th>
+														<th width="400">时间</th>
+														<th width="150">舱位</th>
+														<th width="150">价格</th>
+														<th>操作</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr data-airfareid="1" role="row"> 
+														<td>中国东方航空</td>
+														<td>MU5461</td>
+														<td>
+															<div class="fly_td">
+																<div class="fly_td_zl">
+																	<p>温州</p>
+																	<p>2016-5-6 20:00</p>
+																	<p>龙湾机场</p>
+																</div>
+																<div class="fly_td_zl">
+																	<span class="fl"></span>
+																</div>
+																<div class="fly_td_zl">
+																	<p>昆明</p>
+																	<p>2016-5-6 23:00</p>
+																	<p>昆明长水</p>
+																</div>
+															</div>
+
+														</td>
+														<td>经济舱</td>
+														<td>￥600</td>
+														<td>
+															<a href="javascript:;" class="btn green btn-sm edit">编辑 <i class="glyphicon glyphicon-edit"></i></a>
+															<a href="javascript:;" class="btn default btn-sm del">删除 <i class="glyphicon glyphicon-remove"></i></a>	
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>	
+							<!--去程航班 /-->
+							<!--返程航班-->
+							<div class="portlet box grey-cascade">
+								<div class="portlet-title">
+									<div class="caption">返程航班</div>
+									<div class="tools"><a href="javascript:;" class="collapse" data-original-title="收缩" title=""></a></div>
+								</div>
+								<div class="portlet-body">
+									<!--表格-->
+									<div class="dataTables_wrapper no-footer">
+										<div class="table-scrollable" style="overflow-x:inherit;overflow-y:inherit;">
+											<table class="table table-bordered table-hover" id="flyBack">
+												<thead>
+													<tr role="row">
+														<th width="200">航空公司</th>
+														<th width="150">航班</th>
+														<th width="400">时间</th>
+														<th width="150">舱位</th>
+														<th width="150">价格</th>
+														<th>操作</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr data-airfareid="1" role="row"> 
+														<td>中国东方航空</td>
+														<td>MU5461</td>
+														<td>
+															<div class="fly_td">
+																<div class="fly_td_zl">
+																	<p>温州</p>
+																	<p>2016-5-6 20:00</p>
+																	<p>龙湾机场</p>
+																</div>
+																<div class="fly_td_zl">
+																	<span class="fl"></span>
+																</div>
+																<div class="fly_td_zl">
+																	<p>昆明</p>
+																	<p>2016-5-6 23:00</p>
+																	<p>昆明长水</p>
+																</div>
+															</div>
+														</td>
+														<td>经济舱</td>
+														<td>￥600</td>
+														<td>
+															<a href="javascript:;" class="btn green btn-sm edit">编辑 <i class="glyphicon glyphicon-edit"></i></a>
+															<a href="javascript:;" class="btn default btn-sm del">删除 <i class="glyphicon glyphicon-remove"></i></a>	
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>	
+							<!--返程航班 /-->
+							<!--增加航班form框-->
+							<div class="modal fade bs-modal-lg" id="addFly" role="dialog" aria-hidden="true">
 								<div class="modal-dialog modal-lg">
 									<div class="modal-content">
 										<div class="modal-header">
@@ -167,54 +245,73 @@
 										<div class="modal-body">
 											<div class="form-body">
 												<div class="form-group">
-			                                    	<label class="col-md-2 control-label">序号：</label>
-			                                        <div class="col-md-3">
-			                                        	<div class="input-group">
-			                                        		<span class="input-group-addon">第</span>
-			                                        		<input type="text" class="form-control" id="num" name="num">
-			                                        		<span class="input-group-addon">天</span>
-			                                        	</div>
-			                                            
+			                                    	<label class="col-md-2 control-label">往返选择：</label>
+			                                        <div class="col-md-8">
+			                                            <select class="form-control type">
+															<option value="">请选择</option>
+															<option value="0">去程</option>
+															<option value="1">返程</option>
+														</select>
 			                                        </div>
 			                                    </div>
 												<div class="form-group">
-			                                    	<label class="col-md-2 control-label">标题：</label>
+													<label class="col-md-2 control-label">时间：</label>
+													<div class="col-md-8">
+														<input type="text" class="form-control reservationtime" placeholder="选择时间">
+														<input type="hidden" class="start_time">
+														<input type="hidden" class="end_time">														
+													</div>
+												</div>
+												<div class="form-group">
+			                                    	<label class="col-md-2 control-label">出发地：</label>
 			                                        <div class="col-md-8">
-			                                            <input type="text" class="form-control" id="name" name="name" placeholder="行程标题">
+			                                            <input type="text" class="form-control input-inline go_address" placeholder="格式：省份-城市">
+			                                            <input type="text" class="form-control input-inline go_airport" placeholder="机场名">
 			                                        </div>
 			                                    </div>
 			                                    <div class="form-group">
-			                                    	<label class="col-md-2 control-label">摘要：</label>
+			                                    	<label class="col-md-2 control-label">目的地：</label>
 			                                        <div class="col-md-8">
-			                                            <textarea class="form-control" id="explain" name="explain" placeholder="摘要" rows="4"></textarea>
+			                                            <input type="text" class="form-control input-inline back_address" placeholder="格式：国家-城市">
+			                                            <input type="text" class="form-control input-inline back_airport" placeholder="机场名">
+			                                        </div>
+			                                    </div>
+												<div class="form-group">
+			                                    	<label class="col-md-2 control-label">航空公司：</label>
+			                                        <div class="col-md-8">
+			                                            <input type="text" class="form-control company" placeholder="航空公司">
 			                                        </div>
 			                                    </div>
 			                                    <div class="form-group">
-			                                    	<label class="col-md-2 control-label">详细行程：</label>
+			                                    	<label class="col-md-2 control-label">航班：</label>
 			                                        <div class="col-md-8">
-			                                            <textarea class="form-control ke" id="detailed" name="detailed"></textarea>
+			                                            <input type="text" class="form-control flight" placeholder="航班">
 			                                        </div>
 			                                    </div>
 			                                    <div class="form-group">
-			                                    	<label class="col-md-2 control-label"></label>
+			                                    	<label class="col-md-2 control-label">舱位：</label>
 			                                        <div class="col-md-8">
-			                                        	<div id="tripPickfiles" class="trip_up">&nbsp;</div>
-			                                            <div class="form-control-static trip_img_box">
-			                                            </div>
+			                                            <input type="text" class="form-control seat" placeholder="舱位">
+			                                        </div>
+			                                    </div>
+			                                    <div class="form-group">
+			                                    	<label class="col-md-2 control-label">价格：</label>
+			                                        <div class="col-md-8">
+			                                            <input type="text" class="form-control price" placeholder="价格">
 			                                        </div>
 			                                    </div>
 											</div>
 										</div>
 										<div class="modal-footer">
-											<button type="button" class="btn green" onclick="trip.add()">确定</button>
+											<button type="button" class="btn green" onclick="airfare.add()">确定</button>
 											<button type="button" class="btn" data-dismiss="modal">关闭</button>
 										</div>
 									</div>
 								</div>
 							</div>
-							<!--增加行程form框 /-->
-							<!--编辑行程form框-->
-							<div class="modal fade bs-modal-lg" id="editTripForm" tabindex="-1" role="basic" aria-hidden="true">
+							<!--增加航班form框 /-->
+							<!--编辑航班form框-->
+							<div class="modal fade bs-modal-lg" id="editFly" role="dialog" aria-hidden="true">
 								<div class="modal-dialog modal-lg">
 									<div class="modal-content">
 										<div class="modal-header">
@@ -222,16 +319,74 @@
 											<h4 class="modal-title">行程内容设置</h4>
 										</div>
 										<div class="modal-body">
-											
+											<!-- <div class="form-body">
+												<input type="hidden" name="flyId" id="flyId" value="1">
+												<div class="form-group">
+			                                    	<label class="col-md-2 control-label">往返选择：</label>
+			                                        <div class="col-md-8">
+			                                            <select class="form-control type">
+															<option value="">请选择</option>
+															<option value="0">去程</option>
+															<option value="1">返程</option>
+														</select>
+			                                        </div>
+			                                    </div>
+												<div class="form-group">
+													<label class="col-md-2 control-label">时间：</label>
+													<div class="col-md-8">
+														<input type="text" class="form-control reservationtime" placeholder="选择时间">
+														<input type="hidden" class="start_time">
+														<input type="hidden" class="end_time">														
+													</div>
+												</div>
+												<div class="form-group">
+			                                    	<label class="col-md-2 control-label">出发地：</label>
+			                                        <div class="col-md-8">
+			                                            <input type="text" class="form-control input-inline go_address" placeholder="格式：省份-城市">
+			                                            <input type="text" class="form-control input-inline go_airport" placeholder="机场名">
+			                                        </div>
+			                                    </div>
+			                                    <div class="form-group">
+			                                    	<label class="col-md-2 control-label">目的地：</label>
+			                                        <div class="col-md-8">
+			                                            <input type="text" class="form-control input-inline back_address" placeholder="格式：国家-城市">
+			                                            <input type="text" class="form-control input-inline back_airport" placeholder="机场名">
+			                                        </div>
+			                                    </div>
+												<div class="form-group">
+			                                    	<label class="col-md-2 control-label">航空公司：</label>
+			                                        <div class="col-md-8">
+			                                            <input type="text" class="form-control company" placeholder="航空公司">
+			                                        </div>
+			                                    </div>
+			                                    <div class="form-group">
+			                                    	<label class="col-md-2 control-label">航班：</label>
+			                                        <div class="col-md-8">
+			                                            <input type="text" class="form-control flight" placeholder="航班">
+			                                        </div>
+			                                    </div>
+			                                    <div class="form-group">
+			                                    	<label class="col-md-2 control-label">舱位：</label>
+			                                        <div class="col-md-8">
+			                                            <input type="text" class="form-control seat" placeholder="舱位">
+			                                        </div>
+			                                    </div>
+			                                    <div class="form-group">
+			                                    	<label class="col-md-2 control-label">价格：</label>
+			                                        <div class="col-md-8">
+			                                            <input type="text" class="form-control price" placeholder="价格">
+			                                        </div>
+			                                    </div>
+											</div> -->
 										</div>
 										<div class="modal-footer">
-											<button type="button" class="btn green" onclick="trip.edit()">保存</button>
+											<button type="button" class="btn green" onclick="airfare.edit()">确定</button>
 											<button type="button" class="btn" data-dismiss="modal">关闭</button>
 										</div>
 									</div>
 								</div>
 							</div>
-							<!--编辑行程form框 /-->
+							<!--编辑航班form框 /-->
                         </div>
                     </form>
 				</div>
@@ -267,8 +422,11 @@
 <script src="../static/style/default/mix/metronic3.6/theme/assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
 <script src="../static/style/default/mix/metronic3.6/theme/assets/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
 <script src="../static/style/default/mix/metronic3.6/theme/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+
 <!-- END CORE PLUGINS -->
 <!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="../static/style/default/mix/metronic3.6/theme/assets/global/plugins/bootstrap-daterangepicker/moment.min.js" type="text/javascript"></script>
+<script src="../static/style/default/mix/metronic3.6/theme/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.js" type="text/javascript"></script>
 <script src="../static/style/default/mix/metronic3.6/theme/assets/global/plugins/plupload/js/plupload.full.min.js"></script>
 <script src="../static/style/default/js/lib/kindeditor/kindeditor-all-min.js"></script>
 <script src="../static/style/default/js/lib/kindeditor/lang/zh_CN.js"></script>
@@ -278,7 +436,7 @@
 <script src="../static/style/default/mix/metronic3.6/theme/assets/admin/layout/scripts/layout.js" type="text/javascript"></script>
 <script src="../static/style/default/mix/metronic3.6/theme/assets/admin/layout/scripts/quick-sidebar.js" type="text/javascript"></script>
 <script src="../static/style/default/mix/metronic3.6/theme/assets/admin/layout/scripts/demo.js" type="text/javascript"></script>
-<script src="../scripts/productTrip.js"></script>
+<script src="../scripts/productAirfare.js"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
 $(function() {    

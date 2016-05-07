@@ -178,3 +178,24 @@ trip.edit=function(){
 		}
 	})
 }
+/*
+	删除行程
+*/
+$(".del").click(function(){
+	var _this=$(this).parents("tr"),
+		id=_this.data("tripid");
+	$.ajax({
+		url:'../success.php',
+		type:'POST',
+		dataType:'json',
+		data:{
+			id:id
+		}
+	}).done(function(data){
+		if(data.success){
+			_this.animate({opacity:0},800,function(){
+				_this.remove();
+			})
+		}
+	})
+})

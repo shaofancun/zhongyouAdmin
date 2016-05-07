@@ -29,10 +29,15 @@ var prodCLass=new Object();
 	]
 */
 prodCLass.init=function(){
+	var pordId=null;
+	if($("#pordId").length>0) pordId=$("#pordId").val();
 	$.ajax({
 		url:'../class.php',
 		type:'POST',
-		dataType:'json'
+		dataType:'json',
+		data:{
+			pordId:pordId
+		}
 	}).done(function(data){
 		//加载树
 		$('#prodClassTree').jstree({
@@ -168,7 +173,7 @@ spec.addTr=function(e,num){
 		//str="",
 		i=2;
 	box.children("tr").each(function(j,v){
-		var tI=$(v).attr("trid");
+		var tI=$(v).data("trid");
 		if(i<tI) i=tI;
 	})
 	i++;
