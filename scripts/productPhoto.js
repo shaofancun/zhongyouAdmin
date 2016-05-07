@@ -110,6 +110,6 @@ $("#handleImgBox").sortable({
     	_this.children(".handle_img").each(function(i,v){
     		order.push($(v).data("imgid"));
     	})
-    	$("#prodImgs").val(order);
+        $.post("../success.php",{order:order});
     }
 });
