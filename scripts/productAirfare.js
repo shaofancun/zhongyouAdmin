@@ -6,21 +6,20 @@ var pordId=$("#prodId").val();		//商品ID
 /*
 	绑定事件控件
 */
-$('#addFly .reservationtime').daterangepicker({
+var timeOn=$('#addFly .reservationtime').daterangepicker({
 		timePicker: true,
         timePickerIncrement: 1,
-		opens: (Metronic.isRTL() ? 'left' : 'right'),
-        format: 'YYYY-MM-DD h:mm A',
-        separator: ' to ',
+		opens: 'left',
         startDate: moment().subtract('days', 29),
-        endDate: moment()
-	},
-	function(start, end, label) {
-		$('#addFly .reservationtime').val(start.format('YYYY-MM-DD hh:mm') + ' 至 ' + end.format('YYYY-MM-DD hh:mm'));
-		$('#addFly .start_time').val(start.format('YYYY-MM-DD hh:mm'));
-		$('#addFly .end_time').val(end.format('YYYY-MM-DD hh:mm'));
-	}
-);
+        endDate: moment(),
+        timePicker12Hour:false
+	});
+timeOn.on('apply.daterangepicker', function(ev, picker) {
+	$('#addFly .reservationtime').val(picker.startDate.format('YYYY-MM-DD HH:MM') + ' 至 ' + picker.endDate.format('YYYY-MM-DD HH:MM'));
+	$('#addFly .start_time').val(picker.startDate.format('YYYY-MM-DD HH:MM'));
+	$('#addFly .end_time').val(picker.endDate.format('YYYY-MM-DD HH:MM'));
+});
+
 
 var airfare=new Object();
 /*

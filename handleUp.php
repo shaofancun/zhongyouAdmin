@@ -1,5 +1,4 @@
 <?php
-
 $time=rand(1,99999);
 $filename="aaa".$time.".jpg";
 $destination="bbb/".$filename;

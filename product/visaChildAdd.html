@@ -115,7 +115,7 @@ License: You must have a valid license purchased only from themeforest(the above
 	<div class="page-content-wrapper">
 		<div class="page-content" style="min-height:812px">
 			<!--标题栏-->
-			<h3 class="page-title">添加签证 <small>添加一个新的签证</small></h3>
+			<h3 class="page-title">添加子签证 <small>添加一个新的子签证</small></h3>
 			<!--路径导航-->
 			<div class="page-bar">
 				<ul class="page-breadcrumb">
@@ -128,14 +128,14 @@ License: You must have a valid license purchased only from themeforest(the above
 			<!--表单-->
 			<div class="row">
 				<div class="col-md-12">
-					<form action="" class="form-horizontal form-row-seperated" method="post">
+					<form action="../a.php" class="form-horizontal form-row-seperated" method="post">
 						<div class="portlet">
 							<div class="portlet-title">
 								<div class="caption">
 									<i class="fa fa-edit"></i>内容设置
 								</div>
 								<div class="pull-right">
-									<a href="../product/visaList.html" class="btn default"><i class="fa fa-angle-left"></i> 返回</a>
+									<a href="../product/visaChildList.html?id=1" class="btn default"><i class="fa fa-angle-left"></i> 返回</a>
 									<button type="reset" class="btn default"><i class="fa fa-refresh"></i> 重置</button>
 									<button type="submit" class="btn green"><i class="fa fa-check-circle"></i> 保存</button>
 								</div>
@@ -144,14 +144,41 @@ License: You must have a valid license purchased only from themeforest(the above
 						<div class="portlet-body form">
 							<div class="tab-content">
 								<div class="form-body">
+									<input type="hidden" name="visaId" value="" placeholder="签证ID">
 									<div class="form-group">
 										<label class="control-label col-md-2">签证名称： </label>
 										<div class="col-md-8"><input type="text" class="form-control" name="name"></div>
 									</div>
 									<div class="form-group">
-	                                    <label class="col-md-2 control-label">备注：</label>
+	                                    <label class="col-md-2 control-label">所需资料：</label>
 	                                    <div class="col-md-8">
-	                                        <textarea class="form-control ke" name="info"></textarea>
+	                                        <div class="dataTables_wrapper no-footer">
+												<div class="table-scrollable">
+													<table class="table table-bordered table-hover">
+														<thead>
+															<tr>
+																<th width="200px">资料名称</th>
+																<th width="150px">资料类型</th>
+																<th width="400px">资料说明</th>
+																<th width="300px">附件上传</th>
+																<th>操作</th>
+															</tr>
+														</thead>
+														<tbody id="tbody">
+															<tr>
+																<td><input type="text" class="form-control" name="items[1][name]"></td>
+																<td><input type="text" class="form-control" name="items[1][type]"></td>
+																<td><textarea name="items[1][info]" class="form-control"></textarea></td>
+																<td>
+																	<button type="button" class="btn green upload">上传附件 <i class="fa fa-plus"></i></button><input type="hidden" name="items[1][doc]"><a href='' class="btn blue">查看</a>
+																</td>
+																<td><button type="button" class="btn red delete">删除</button></td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+											</div>
+											<a href="javascript:;" class="btn btn-default" id="addTr"><i class="fa fa-plus"></i> 添加一行</a>
 	                                    </div>
 	                                </div>
 								</div>
@@ -194,16 +221,17 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="../static/style/default/mix/metronic3.6/theme/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
 <!-- END CORE PLUGINS -->
 <!-- BEGIN PAGE LEVEL PLUGINS -->
-<script type="text/javascript" src="../static/style/default/mix/metronic3.6/theme/assets/global/plugins/select2/select2.min.js"></script>
-<script type="text/javascript" src="../static/style/default/mix/metronic3.6/theme/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<link rel="stylesheet" href="../static/style/default/js/lib/kindeditor/themes/default/default.css" />
 <script src="../static/style/default/js/lib/kindeditor/kindeditor-all-min.js"></script>
 <script src="../static/style/default/js/lib/kindeditor/lang/zh_CN.js"></script>
+
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="../static/style/default/mix/metronic3.6/theme/assets/global/scripts/metronic.js" type="text/javascript"></script>
 <script src="../static/style/default/mix/metronic3.6/theme/assets/admin/layout/scripts/layout.js" type="text/javascript"></script>
 <script src="../static/style/default/mix/metronic3.6/theme/assets/admin/layout/scripts/quick-sidebar.js" type="text/javascript"></script>
 <script src="../static/style/default/mix/metronic3.6/theme/assets/admin/layout/scripts/demo.js" type="text/javascript"></script>
+<script src="../scripts/visa.js"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
 $(function() {    
@@ -211,17 +239,6 @@ $(function() {
 	Layout.init(); // init current layout
 	QuickSidebar.init(); // init quick sidebar
 	Demo.init(); // init demo features
-	//富文本绑定初始化
-    KindEditor.ready(function(K) {
-	    window.editor = K.create('.ke',{
-	        uploadJson:'/imageuc/kindeditor/upload?',
-	        resizeType :1,
-	        width:'100%',
-	        height:'500px',
-	        allowPreviewEmoticons : true,
-	        allowImageUpload : true,
-	    });	
-	});
 });
 </script>
 <!-- END JAVASCRIPTS -->

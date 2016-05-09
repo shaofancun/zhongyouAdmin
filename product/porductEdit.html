@@ -160,7 +160,11 @@
                                     <div class="form-group">
                                         <label class="col-md-2 control-label">出发城市：</label>
                                         <div class="col-md-10">
-                                            <div id="select_region"></div>
+                                            <div class="select_region" rel='["province":3133,"city":3218,"county":3219]'>
+                                                <select name="province_id" id="province_id" class="form-control input-small input-inline"><option value="0">请选择</option></select>
+                                                <select name="city_id" id="city_id" class="form-control input-small input-inline"><option value="0">请选择</option></select>
+                                                <select name="county_id" id="county_id" class="form-control input-small input-inline"><option value="0">请选择</option></select>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -367,8 +371,8 @@
 <script src="../static/style/default/mix/metronic3.6/theme/assets/admin/layout/scripts/layout.js" type="text/javascript"></script>
 <script src="../static/style/default/mix/metronic3.6/theme/assets/admin/layout/scripts/quick-sidebar.js" type="text/javascript"></script>
 <script src="../static/style/default/mix/metronic3.6/theme/assets/admin/layout/scripts/demo.js" type="text/javascript"></script>
+<script src="../scripts/regionNew.js"></script>
 <script src="../scripts/product.js"></script>
-<script src="../scripts/region.js" p="" c1="" c2="" id="js_region"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
 $(function() {    

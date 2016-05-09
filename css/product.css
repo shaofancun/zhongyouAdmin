@@ -18,7 +18,8 @@ a:hover {
 }
 .pord_class,
 .pord_add_class,
-.spec_add_class {
+.spec_add_class,
+.spec_copy_class {
   display: inline-block;
   height: 32px;
   line-height: 32px;
@@ -26,17 +27,20 @@ a:hover {
 }
 .pord_class i,
 .pord_add_class i,
-.spec_add_class i {
+.spec_add_class i,
+.spec_copy_class i {
   color: #ddd;
 }
 .pord_class:hover,
 .pord_add_class:hover,
-.spec_add_class:hover {
+.spec_add_class:hover,
+.spec_copy_class:hover {
   color: #fff;
 }
 .pord_class:hover i,
 .pord_add_class:hover i,
-.spec_add_class:hover i {
+.spec_add_class:hover i,
+.spec_copy_class:hover i {
   color: #fff;
 }
 .pord_class {
@@ -51,23 +55,37 @@ a:hover {
   cursor: pointer;
 }
 .pord_add_class,
-.spec_add_class {
+.spec_add_class,
+.spec_copy_class {
   border: 1px dotted #e5e5e5;
   cursor: pointer;
 }
 .pord_add_class:hover,
-.spec_add_class:hover {
+.spec_add_class:hover,
+.spec_copy_class:hover {
   border: 1px solid #2977f7;
   background: #2977f7;
 }
+.spec_add_class,
+.spec_copy_class {
+  height: 34px;
+  line-height: 34px;
+}
 .spec_class {
   display: inline-block;
-  height: 32px;
-  line-height: 32px;
+  height: 34px;
+  line-height: 34px;
   padding: 0px 7px;
   border: 1px solid #e5e5e5;
   margin-right: 10px;
   cursor: pointer;
+  margin-bottom: 9px;
+}
+.spec_class button {
+  float: right;
+  margin-top: 4px;
+  margin-left: 10px;
+  z-index: 10;
 }
 .spec_class a {
   color: #333;
