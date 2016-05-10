@@ -37,6 +37,7 @@
 <link href="../static/style/default/mix/metronic3.6/theme/assets/admin/layout/css/themes/darkblue.css" rel="stylesheet" type="text/css" id="style_color"/>
 <link href="../static/style/default/mix/metronic3.6/theme/assets/admin/layout/css/custom.css" rel="stylesheet" type="text/css"/>
 <link href="../static/style/default/mix/metronic3.6/theme/assets/global/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css"/>
+<link href="../static/style/default/mix/metronic3.6/theme/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css"/>
 <link rel="stylesheet" href="../css/product.min.css" />
 <!-- END THEME STYLES -->
 <link rel="shortcut icon" href="favicon.ico"/>
@@ -152,6 +153,18 @@
                                     </div>
                                     <!--商品分类 /-->
                                     <div class="form-group">
+                                        <label class="col-md-2 control-label">类型：</label>
+                                        <div class="col-md-6">
+                                            <select class="form-control" name="type" id="typeSelect">
+                                                <option value="">请选择</option>
+                                                <option value="1" selected>类型1</option>
+                                                <option value="2">类型2</option>
+                                                <option value="3">类型3</option>
+                                            </select>
+                                            <input type="hidden" id="typeOption" value='<option value="1">套餐1</option><option value="2">套餐2</option>'>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
                                         <label class="col-md-2 control-label">标题：</label>
                                         <div class="col-md-6">
                                             <input type="text" class="form-control" name="name" placeholder="商品标题">
@@ -207,39 +220,39 @@
                                             <div class="form-control-static spec_class_box">
                                                 <ul>
                                                     <li class="spec_class">
-                                                        <a href="#tab2016-05-06" data-toggle="tab" aria-expanded="true">
-                                                            2016-05-06 <i class="fa fa-times" onclick="spec.del(this,'2016-05-06')"></i>
-                                                        </a>
+                                                    <a href="#tab1" data-toggle="tab" aria-expanded="true">
+                                                        <span class="time1">请选择时间</span>
+                                                        <button type="button" class="btn btn-default btn-xs" onclick="spec.del(this,'1')"><i class="fa fa-times"></i> 删除</button>
+                                                        <button type="button" class="btn btn-default btn-xs time_change"><i class="fa fa-pencil"></i> 选择时间</button>
+                                                        <input type="hidden" name="items[1][time]" value="">
+                                                    </a>
                                                     </li>
                                                 </ul>
                                             </div>
-                                            <div class="spec_add_class">新增行程日期 <i class="fa fa-calendar"></i></div>
+                                            <div class="spec_add_class">新增规格 <i class="fa fa-plus"></i></div>
+                                            <div class="spec_copy_class">复制规格 <i class="fa fa-copy"></i></div>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-md-2 control-label"></label>
                                         <div class="col-md-10">
                                             <div class="tab-content spec_table_box">
-                                                <div class="tab-pane fade" id="tab2016-05-06" data-tableid="1">
+                                                <div class="tab-pane fade" id="tab1" data-tableid="1">
                                                   <table class="table table-bordered">
                                                     <thead>
-                                                      <tr role="row">
-                                                        <th class="sorting_asc" width="150px">货号</th>
-                                                        <th class="sorting_asc" width="200px">产品名
-                                                          <button type="button" class="btn btn-default btn-xs pull-right" onclick="spec.addTr(this,1)"><i class="fa fa-plus"></i> 增加</button></th>
-                                                        <th class="sorting_asc" width="200px">套餐</th>
-                                                        <th class="sorting_asc" width="100px">售价</th>
-                                                        <th class="sorting_asc" width="100px">成本价</th>
-                                                        <th class="sorting_asc" width="100px">市场价</th>
-                                                        <th class="sorting_asc" width="100px">库存</th>
-                                                      </tr>
+                                                        <tr role="row">
+                                                            <th class="sorting_asc" width="200px">货号</th>
+                                                            <th class="sorting_asc" width="200px">产品名 </th>
+                                                            <th class="sorting_asc" width="200px">套餐</th>
+                                                            <th class="sorting_asc" width="100px">售价</th>
+                                                            <th class="sorting_asc" width="100px">成本价</th>
+                                                            <th class="sorting_asc" width="100px">市场价</th>
+                                                            <th class="sorting_asc" width="100px">库存</th>
+                                                        </tr>
                                                     </thead>
                                                     <tbody>
                                                       <tr data-trid="1">
-                                                        <td rowspan="0">
-                                                            <input type="text" class="form-control input-sm" name="items[1][art]">
-                                                            <input type="hidden" name="items[1][time]" value="2016-05-06">
-                                                        </td>
+                                                        <td><input type="text" class="form-control input-sm" name="items[1][art][1]"></td>
                                                         <td><input type="text" class="form-control input-sm" name="items[1][item_name][1]" value="成人"></td>
                                                         <td><select class="form-control input-sm spec_select" name="items[1][specval][1]"></select></td>
                                                         <td><input type="text" class="form-control input-sm" name="items[1][price][1]"></td>
@@ -248,6 +261,7 @@
                                                         <td><input type="text" class="form-control input-sm" name="items[1][stock][1]"></td>
                                                       </tr>
                                                       <tr data-trid="2">
+                                                      <td><input type="text" class="form-control input-sm" name="items[1][art][2]"></td>
                                                         <td><input type="text" class="form-control input-sm" name="items[1][item_name][2]" value="儿童"></td>
                                                         <td><select class="form-control input-sm spec_select" name="items[1][specval][2]"></select></td>
                                                         <td><input type="text" class="form-control input-sm" name="items[1][price][2]"></td>
@@ -257,11 +271,24 @@
                                                       </tr>
                                                     </tbody>
                                                   </table>
+                                                  <button type="button" class="btn green" onclick="spec.addTr(this,'1')"><i class="fa fa-plus"></i> 增加一行</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <!--规格 /-->
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">上架时间：</label>
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control form_datetime" name="upTime" value="2016-05-14 10:35">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">下架时间：</label>
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control form_datetime" name="downTime" value="2016-05-14 10:35">
+                                        </div>
+                                    </div>
                                     <div class="form-group">
                                         <label class="col-md-2 control-label">补差价提示：</label>
                                         <div class="col-md-6">
@@ -362,6 +389,7 @@
 <script src="../static/style/default/mix/metronic3.6/theme/assets/global/plugins/plupload/js/plupload.full.min.js"></script>
 <script src="../static/style/default/mix/metronic3.6/theme/assets/global/plugins/bootstrap-daterangepicker/moment.min.js" type="text/javascript"></script>
 <script src="../static/style/default/mix/metronic3.6/theme/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.js" type="text/javascript"></script>
+<script src="../static/style/default/mix/metronic3.6/theme/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
 <script src="../static/style/default/js/lib/kindeditor/kindeditor-all-min.js"></script>
 <script src="../static/style/default/js/lib/kindeditor/lang/zh_CN.js"></script>
 

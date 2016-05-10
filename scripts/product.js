@@ -192,7 +192,7 @@ spec.li=function(num){
 	timeStr+='<li class="spec_class">';
 	timeStr+='<a href="#tab'+num+'" data-toggle="tab" aria-expanded="true">';
 	timeStr+='<span class="time'+num+'">请选择时间</span>';
-	timeStr+='<button type="button" class="btn btn-default btn-xs"><i class="fa fa-times" onclick=\'spec.del(this,"'+num+'")\'></i> 删除</button>';
+	timeStr+='<button type="button" class="btn btn-default btn-xs" onclick=\'spec.del(this,"'+num+'")\'><i class="fa fa-times"></i> 删除</button>';
 	timeStr+='<button type="button" class="btn btn-default btn-xs time_change"><i class="fa fa-pencil"></i> 选择时间</button><input type="hidden" name="items['+num+'][time]" value="">';	
 	timeStr+='</a></li>';
 	return timeStr;
@@ -240,6 +240,7 @@ spec.onTime=function(dom){
 		}
 	})
 }
+spec.onTime($('.time_change'));
 /*
 	规格增加一行
 */
