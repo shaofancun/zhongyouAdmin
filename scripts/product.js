@@ -113,44 +113,43 @@ var spec=new Object();		//规格相关
 var specTable=$(".spec_table_box"),
 	specUl=$(".spec_class_box ul");
 $(".spec_add_class").click(function(){
-	var optionVal=$("#typeOption").val();
+	var optionVal=$("#typeOption").val(),
+		num=0;
 	if(!optionVal){
 		alert("请选择类型");
 		return false;
 	}
-	var num=$(".spec_class_box li").length+1;
-	spec.add(num,optionVal);
-})
-spec.add=function(num,option){
-	var table='',
-		i=0;	//规格序号
-
 	//比较当前I的值
 	specTable.children("div").each(function(k,v){
 		var dI=$(v).data("tableid");
-		if(i<dI) i=dI;
+		if(num<dI) num=dI;
 	});
-	i++;
-	//按钮DOM
-	var timeStr=spec.li(num);
-	//tableDOM
-	var tableTh='<thead><tr role="row"><th class="sorting_asc" width="200px">货号</th><th class="sorting_asc" width="200px">产品名 </th><th class="sorting_asc" width="200px">套餐</th><th class="sorting_asc" width="100px">售价</th><th class="sorting_asc" width="100px">成本价</th><th class="sorting_asc" width="100px">市场价</th><th class="sorting_asc" width="100px">库存</th></tr></thead>';
-	table+='<div class="tab-pane fade" id="tab'+num+'" data-tableid="'+i+'"><table class="table table-bordered">'+tableTh;
-	table+='<tbody><tr data-trid="1"><td><input type="text" class="form-control input-sm" name="items['+i+'][art][1]"></td>';
-	table+='<td><input type="text" class="form-control input-sm" name="items['+i+'][item_name][1]" value="成人"></td>';
-	table+='<td><select class="form-control input-sm spec_select" name="items['+i+'][specval][1]"><option value="">请选择</option>'+option+'</select></td>';
-	table+='<td><input type="text" class="form-control input-sm" name="items['+i+'][price][1]"></td>';
-	table+='<td><input type="text" class="form-control input-sm" name="items['+i+'][cost_price][1]"></td>';
-	table+='<td><input type="text" class="form-control input-sm" name="items['+i+'][mktprice][1]"></td>';
-	table+='<td><input type="text" class="form-control input-sm" name="items['+i+'][stock][1]"></td></tr>';
-	table+='<tr data-trid="2"><td><input type="text" class="form-control input-sm" name="items['+i+'][art][2]"></td><td><input type="text" class="form-control input-sm" name="items['+i+'][item_name][2]" value="儿童"></td>';
-	table+='<td><select class="form-control input-sm spec_select" name="items['+i+'][specval][2]"><option value="">请选择</option>'+option+'</select></td>';
-	table+='<td><input type="text" class="form-control input-sm" name="items['+i+'][price][2]"></td>';
-	table+='<td><input type="text" class="form-control input-sm" name="items['+i+'][cost_price][2]"></td>';
-	table+='<td><input type="text" class="form-control input-sm" name="items['+i+'][mktprice][2]"></td>';
-	table+='<td><input type="text" class="form-control input-sm" name="items['+i+'][stock][2]"></td></tr>';
+	num++;
+	spec.add(num,optionVal);
+})
+spec.add=function(num,option){
+	var table='',		//表格
+		tableTh='';		//表格头部
+	var timeStr=spec.li(num);		//按钮DOM
+
+	tableTh+='<thead><tr role="row"><th class="sorting_asc" width="200px">货号</th><th class="sorting_asc" width="200px">产品名 </th><th class="sorting_asc" width="200px">套餐</th><th class="sorting_asc" width="100px">售价</th><th class="sorting_asc" width="100px">成本价</th><th class="sorting_asc" width="100px">市场价</th><th class="sorting_asc" width="100px">库存</th></tr></thead>';
+	table+='<div class="tab-pane fade" id="tab'+num+'" data-tableid="'+num+'"><table class="table table-bordered">'+tableTh;
+	table+='<tbody><tr data-trid="1"><td><input type="text" class="form-control input-sm" name="item_s['+num+'][row][1][fn]"></td>';
+	table+='<td><input type="text" class="form-control input-sm" name="item_s['+num+'][row][1][item_name]" value="成人"></td>';
+	table+='<td><select class="form-control input-sm spec_select" name="item_s['+num+'][row][1][specval]"><option value="">请选择</option>'+option+'</select></td>';
+	table+='<td><input type="text" class="form-control input-sm" name="item_s['+num+'][row][1][price]"></td>';
+	table+='<td><input type="text" class="form-control input-sm" name="item_s['+num+'][row][1][cost_price]"></td>';
+	table+='<td><input type="text" class="form-control input-sm" name="item_s['+num+'][row][1][mktprice]"></td>';
+	table+='<td><input type="text" class="form-control input-sm" name="item_s['+num+'][row][1][stock]"></td></tr>';
+	table+='<tr data-trid="2"><td><input type="text" class="form-control input-sm" name="item_s['+num+'][row][2][art]"></td>';
+	table+='<td><input type="text" class="form-control input-sm" name="item_s['+num+'][row][2][item_name]" value="儿童"></td>';
+	table+='<td><select class="form-control input-sm spec_select" name="item_s['+num+'][row][2][specval]"><option value="">请选择</option>'+option+'</select></td>';
+	table+='<td><input type="text" class="form-control input-sm" name="item_s['+num+'][row][2][price]"></td>';
+	table+='<td><input type="text" class="form-control input-sm" name="item_s['+num+'][row][2][cost_price]"></td>';
+	table+='<td><input type="text" class="form-control input-sm" name="item_s['+num+'][row][2][mktprice]"></td>';
+	table+='<td><input type="text" class="form-control input-sm" name="item_s['+num+'][row][2][stock]"></td></tr>';
 	table+='</tbody></table>';
-	table+='<button type="button" class="btn green" onclick=\'spec.addTr(this,"'+num+'")\'><i class="fa fa-plus"></i> 增加一行</button></div>';
+	table+='<button type="button" class="btn green" onclick=\'spec.addTr(this)\'><i class="fa fa-plus"></i> 增加一行</button></div>';
 	specUl.append(timeStr);
 	specTable.append(table);
 	//绑定下拉框
@@ -174,13 +173,19 @@ $(".spec_copy_class").click(function(){
 			i=j;
 		}
 	})
-	var num=spec_class.length+1,		//规格的长度
-		timeStr=spec.li(num),		//规格的html内容
+	var num=0;		//规格的长度
+	//比较当前I的值
+	specTable.children("div").each(function(k,v){
+		var dI=$(v).data("tableid");
+		if(num<dI) num=dI;
+	});
+	num++;
+	var	timeStr=spec.li(num),		//规格的html内容
 		tableHtml=$(".spec_table_box .tab-pane").eq(i).html();		//第一个表格的html内容
 	specUl.append(timeStr);
 	//绑定时间框
 	new spec.onTime($('.time_change'));
-	specTable.append('<div class="tab-pane fade" id="tab'+num+'" data-tableid="'+num+'">'+tableHtml.replace(/items[\[][0-9][\]]/g,'items['+num+']')+'</div>');
+	specTable.append('<div class="tab-pane fade" id="tab'+num+'" data-tableid="'+num+'">'+tableHtml.replace(/item_s[\[][0-9][\]]/g,'item_s['+num+']')+'</div>');
 	$('#tab'+num+' .select2-container').remove();
 	$('#tab'+num+'').find("select").select2();
 })
@@ -193,7 +198,7 @@ spec.li=function(num){
 	timeStr+='<a href="#tab'+num+'" data-toggle="tab" aria-expanded="true">';
 	timeStr+='<span class="time'+num+'">请选择时间</span>';
 	timeStr+='<button type="button" class="btn btn-default btn-xs" onclick=\'spec.del(this,"'+num+'")\'><i class="fa fa-times"></i> 删除</button>';
-	timeStr+='<button type="button" class="btn btn-default btn-xs time_change"><i class="fa fa-pencil"></i> 选择时间</button><input type="hidden" name="items['+num+'][time]" value="">';	
+	timeStr+='<button type="button" class="btn btn-default btn-xs time_change"><i class="fa fa-pencil"></i> 选择时间</button><input type="hidden" name="item_s['+num+'][time]" value="">';	
 	timeStr+='</a></li>';
 	return timeStr;
 }
@@ -244,18 +249,19 @@ spec.onTime($('.time_change'));
 /*
 	规格增加一行
 */
-spec.addTr=function(e,num){
+spec.addTr=function(e){
 	var box=$(e).prev('table').children('tbody'),
 		option=$("#typeOption").val(),
 		str="",
+		num=$(e).parent().data('tableid'),
 		i=box.find('tr').length+1;
-	str+='<tr data-trid="'+i+'"><td><input type="text" class="form-control input-sm" name="items['+num+'][art]['+i+']"></td>';
-	str+='<td><input type="text" class="form-control input-sm" name="items['+num+'][item_name]['+i+']" value=""></td>';
-	str+='<td><select class="form-control input-sm spec_select" name="items['+num+'][specval]['+i+']"><option value="">请选择</option>'+option+'</select></td>';
-	str+='<td><input type="text" class="form-control input-sm" name="items['+num+'][price]['+i+']"></td>';
-	str+='<td><input type="text" class="form-control input-sm" name="items['+num+'][cost_price]['+i+']"></td>';
-	str+='<td><input type="text" class="form-control input-sm" name="items['+num+'][mktprice]['+i+']"></td>';
-	str+='<td><input type="text" class="form-control input-sm" name="items['+num+'][stock]['+i+']"></td></tr>';
+	str+='<tr data-trid="'+i+'"><td><input type="text" class="form-control input-sm" name="item_s['+num+'][row]['+i+'][art]"></td>';
+	str+='<td><input type="text" class="form-control input-sm" name="item_s['+num+'][row]['+i+'][item_name]" value=""></td>';
+	str+='<td><select class="form-control input-sm spec_select" name="item_s['+num+'][row]['+i+'][specval]"><option value="">请选择</option>'+option+'</select></td>';
+	str+='<td><input type="text" class="form-control input-sm" name="item_s['+num+'][row]['+i+'][price]"></td>';
+	str+='<td><input type="text" class="form-control input-sm" name="item_s['+num+'][row]['+i+'][cost_price]"></td>';
+	str+='<td><input type="text" class="form-control input-sm" name="item_s['+num+'][row]['+i+'][mktprice]"></td>';
+	str+='<td><input type="text" class="form-control input-sm" name="item_s['+num+'][row]['+i+'][stock]"></td></tr>';
 	box.append(str);
 	$('tr[data-trid="'+i+'"]').find("select").select2();
 }

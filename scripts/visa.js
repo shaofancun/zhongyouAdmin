@@ -4,9 +4,15 @@ var tbody=$("#tbody");
 	添加一行
 */
 $("#addTr").click(function(){
-	var i=tbody.find('tr').length+1,
-		str='';
-	str+='<tr><td><input type="text" class="form-control" name="items['+i+'][name]"></td>';
+	var i=0,
+		str='',
+		visaTr=$("#tbody tr");
+	visaTr.each(function(k,v){
+		var dI=$(v).data("id");
+		if(i<dI) i=dI;
+	});
+	i++;
+	str+='<tr data-id="'+i+'"><td><input type="text" class="form-control" name="items['+i+'][name]"></td>';
 	str+='<td><input type="text" class="form-control" name="items['+i+'][type]"></td>';
 	str+='<td><textarea name="items['+i+'][info]" class="form-control"></textarea></td>';
 	str+='<td><button type="button" class="btn green upload'+i+'">上传附件 <i class="fa fa-plus"></i></button><input type="hidden" name="items['+i+'][doc]"><a href="" class="btn blue">查看</a></td>';

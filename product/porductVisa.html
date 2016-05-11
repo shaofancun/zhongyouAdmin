@@ -27,6 +27,7 @@
 <!-- BEGIN PAGE STYLES -->
 <link rel="stylesheet" type="text/css" href="../static/style/default/mix/metronic3.6/theme/assets/global/plugins/jstree/dist/themes/default/style.min.css"/>
 <link href="../static/style/default/mix/metronic3.6/theme/assets/admin/pages/css/tasks.css" rel="stylesheet" type="text/css"/>
+<link href="../static/style/default/mix/metronic3.6/theme/assets/global/plugins/icheck/skins/all.css" rel="stylesheet" type="text/css"/>
 <!-- END PAGE STYLES -->
 <!-- BEGIN THEME STYLES -->
 <!-- DOC: To use 'rounded corners' style just load 'components-rounded.css' stylesheet instead of 'components.css' in the below style tag -->
@@ -87,21 +88,22 @@
 	<div class="page-content-wrapper">
 		<div class="page-content" style="min-height:812px">
 			<!--标题栏-->
-			<h3 class="page-title">商品行程 </h3>
+			<h3 class="page-title">商品签证 </h3>
 			<!--路径导航-->
 			<div class="page-bar">
 				<ul class="page-breadcrumb">
 					<li><i class="fa fa-home"></i><a href="#">首页</a><i class="fa fa-angle-right"></i></li>
 					<li><a href="#">商品</a><i class="fa fa-angle-right"></i></li>
 					<li><a href="#">商品列表</a><i class="fa fa-angle-right"></i></li>
-					<li><a href="#">行程</a></li>
+					<li><a href="#">签证</a></li>
 				</ul>
 			</div>
 			<!--表单-->
 			<div class="row">
 				<div class="col-md-12">
-					<form class="form-horizontal form-row-seperated form">
+					<form method="post" class="form-horizontal form-row-seperated form">
 						<input type="hidden" name="prodId" id="prodId" value="1" placeholder="商品ID">
+						<input type="hidden" value="1" id="visaIds" placeholder="选择的签证ID">
                     	<div class="portlet">
 							<div class="portlet-title">
 								<div class="caption">
@@ -113,107 +115,86 @@
 							</div>
 						</div>
                         <div class="tab-content">
-							<div class="portlet-body">
-								<div class="table-toolbar">
-									<div class="row">
-										<div class="col-md-6">
-											<button type="button" class="btn green" data-toggle="modal" href="#addTripForm">新增 <i class="fa fa-plus"></i></button>
-										</div>
-									</div>
-								</div>
-								<div class="dataTables_wrapper no-footer" id="sample_1_wrapper">
-									<div class="table-scrollable">
-										<table class="table table-striped table-bordered table-hover dataTable no-footer" role="grid" aria-describedby="sample_1_info">
-											<thead>
-												<tr role="row">
-													<th width="80">天数</th>
-													<th width="200">标题</th>
-													<th width="400">摘要</th>
-													<th>操作</th>
-												</tr>
-											</thead>
-											<tbody id="tripBox">
-												<tr data-tripid="1"> 
-													<td>第1天</td>
-													<td>普通会员</td>
-													<td>普通用户</td>
-													<td>
-														<a href="../product/porductTripEdit.html?id=1" class="btn green btn-sm">编辑 <i class="glyphicon glyphicon-edit"></i></a>
-														<a href="javascript:;" class="btn default btn-sm del">删除 <i class="glyphicon glyphicon-remove"></i></a>	
-													</td>
-												</tr>
-												<tr data-tripid="2"> 
-													<td>第2天</td>
-													<td>普通会员</td>
-													<td>普通用户</td>
-													<td>
-														<a href="../product/porductTripEdit.html?id=2" class="btn green btn-sm">编辑 <i class="glyphicon glyphicon-edit"></i></a>
-														<a href="javascript:;" class="btn default btn-sm del">删除 <i class="glyphicon glyphicon-remove"></i></a>	
-													</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
+                        	<div class="margin-bottom-10">
+								<a data-toggle="modal" href="#visaModal" class="btn yellow"><i class="fa fa-plus"></i> 选择签证 </a>
 							</div>
-							<!--增加行程form框-->
-							<div class="modal fade bs-modal-lg" id="addTripForm" tabindex="-1" role="basic" aria-hidden="true">
-								<div class="modal-dialog modal-lg">
-									<div class="modal-content">
-										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-											<h4 class="modal-title">行程内容设置</h4>
-										</div>
-										<div class="modal-body">
-											<div class="form-body">
-												<div class="form-group">
-			                                    	<label class="col-md-2 control-label">序号：</label>
-			                                        <div class="col-md-3">
-			                                        	<div class="input-group">
-			                                        		<span class="input-group-addon">第</span>
-			                                        		<input type="text" class="form-control" id="num" name="num">
-			                                        		<span class="input-group-addon">天</span>
-			                                        	</div>
-			                                            
-			                                        </div>
-			                                    </div>
-												<div class="form-group">
-			                                    	<label class="col-md-2 control-label">标题：</label>
-			                                        <div class="col-md-8">
-			                                            <input type="text" class="form-control" id="name" name="name" placeholder="行程标题">
-			                                        </div>
-			                                    </div>
-			                                    <div class="form-group">
-			                                    	<label class="col-md-2 control-label">摘要：</label>
-			                                        <div class="col-md-8">
-			                                            <textarea class="form-control" id="explain" name="explain" placeholder="摘要" rows="4"></textarea>
-			                                        </div>
-			                                    </div>
-			                                    <div class="form-group">
-			                                    	<label class="col-md-2 control-label">详细行程：</label>
-			                                        <div class="col-md-8">
-			                                            <textarea class="form-control ke" id="detailed" name="detailed"></textarea>
-			                                        </div>
-			                                    </div>
-			                                    <div class="form-group">
-			                                    	<label class="col-md-2 control-label"></label>
-			                                        <div class="col-md-8">
-			                                        	<div id="tripPickfiles" class="trip_up">&nbsp;</div>
-			                                            <div class="form-control-static trip_img_box">
-			                                            </div>
-			                                        </div>
-			                                    </div>
-											</div>
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn green" onclick="trip.add()">确定</button>
-											<button type="button" class="btn" data-dismiss="modal">关闭</button>
-										</div>
+							<div class="row" id="visaBox">
+								<!--已经添加的签证-->
+								<div class="col-sm-12">
+									<div class="alert alert-success">
+										<span>新华国内旅行意外签证15款（适用于出游1天）</span>
+										<a href="javascript:;" style="margin-top:-5px" class="pull-right btn btn-sm red" onclick="visa.del(this,1)"><i class="fa fa-times"></i> 删除</a>
 									</div>
 								</div>
+								<div class="col-sm-12">
+									<div class="alert alert-success">
+										<span>新华国内旅行意外签证15款（适用于出游1天）</span>
+										<a href="javascript:;" style="margin-top:-5px" class="pull-right btn btn-sm red" onclick="visa.del(this,2)"><i class="fa fa-times"></i> 删除</a>
+									</div>
+								</div>
+								<div class="col-sm-12">
+									<div class="alert alert-success">
+										<span>新华国内旅行意外签证15款（适用于出游1天）</span>
+										<a href="javascript:;" style="margin-top:-5px" class="pull-right btn btn-sm red" onclick="visa.del(this,4)"><i class="fa fa-times"></i> 删除</a>
+									</div>
+								</div>
+								<!--已经添加的签证 /-->
 							</div>
-							<!--增加行程form框 /-->							
                         </div>
+                        <!--签证选择框-->
+						<div class="modal fade bs-modal-lg" id="visaModal" role="dialog" aria-hidden="true">
+							<div class="modal-dialog modal-lg">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+										<h4 class="modal-title">选择签证</h4>
+									</div>
+									<div class="modal-body">
+										<div class="ins_change_box">
+											<!--所有的签证-->
+											<div class="ins_change_li">
+												<label>
+													<input type="checkbox" class="icheck" value="1" data-checkbox="icheckbox_flat-green">
+													<div class="ins_change_info">
+														<p>新华国内旅行意外签证15款（适用于出游1天）</p>
+													</div>
+												</label>
+											</div>
+											<div class="ins_change_li">
+												<label>
+													<input type="checkbox" class="icheck" value="2" data-checkbox="icheckbox_flat-green">
+													<div class="ins_change_info">
+														<p>新华国内旅行意外签证15款（适用于出游1天）</p>
+													</div>
+												</label>
+											</div>
+											<div class="ins_change_li">
+												<label>
+													<input type="checkbox" class="icheck" value="3" data-checkbox="icheckbox_flat-green">
+													<div class="ins_change_info">
+														<p>新华国内旅行意外签证15款（适用于出游1天）</p>
+													</div>
+												</label>
+											</div>
+											<div class="ins_change_li">
+												<label>
+													<input type="checkbox" class="icheck" value="4" data-checkbox="icheckbox_flat-green">
+													<div class="ins_change_info">
+														<p>新华国内旅行意外签证15款（适用于出游1天）</p>
+													</div>
+												</label>
+											</div>
+											<!--所有的签证 /-->
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn green" onclick="visa.add()">确定选择</button>
+										<button type="button" class="btn" data-dismiss="modal">关闭</button>
+									</div>
+								</div>
+							</div>
+						</div>
+                        <!--签证选择框 /-->
                     </form>
 				</div>
 			</div>
@@ -251,15 +232,14 @@
 <!-- END CORE PLUGINS -->
 <!-- BEGIN PAGE LEVEL PLUGINS -->
 <script src="../static/style/default/mix/metronic3.6/theme/assets/global/plugins/plupload/js/plupload.full.min.js"></script>
-<script src="../static/style/default/js/lib/kindeditor/kindeditor-all-min.js"></script>
-<script src="../static/style/default/js/lib/kindeditor/lang/zh_CN.js"></script>
+<script src="../static/style/default/mix/metronic3.6/theme/assets/global/plugins/icheck/icheck.min.js"></script>
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="../static/style/default/mix/metronic3.6/theme/assets/global/scripts/metronic.js" type="text/javascript"></script>
 <script src="../static/style/default/mix/metronic3.6/theme/assets/admin/layout/scripts/layout.js" type="text/javascript"></script>
 <script src="../static/style/default/mix/metronic3.6/theme/assets/admin/layout/scripts/quick-sidebar.js" type="text/javascript"></script>
 <script src="../static/style/default/mix/metronic3.6/theme/assets/admin/layout/scripts/demo.js" type="text/javascript"></script>
-<script src="../scripts/productTrip.js"></script>
+<script src="../scripts/productVisa.js"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
 $(function() {    

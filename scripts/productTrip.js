@@ -18,7 +18,7 @@ KindEditor.ready(function(K) {
         allowImageUpload : true,
 	    items : [
 	    	'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline','removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist','insertunorderedlist'
-			]
+		]
     });	
 });
 /*
@@ -42,20 +42,20 @@ var uploader = new plupload.Uploader({
 			})
     	},
         FilesAdded: function(uploader,files){
-        	// var imgs=$(".trip_img_box .img_l").length;
-        	// if(imgs>=3){
-        	// 	uploader.removeFile(files[0].id);  
-        	// 	alert("只能上传3张图片");
-        	// 	return false;
-        	// }else{
+        	var imgs=$(".trip_img_box .img_l").length;
+        	if(imgs>=3){
+        		uploader.removeFile(files[0].id);  
+        		alert("只能上传3张图片");
+        		return false;
+        	}else{
         		uploader.start();
-        	//}
+        	}
         },
        	//上传结果
         FileUploaded: function(up, file, data) {
             var response = $.parseJSON(data.response);
             if (response.success==1) {
-                var img='<div class="img_l"><span class="trip_img_del"></span><img src="'+response.url+'"></div>';
+                var img='<div class="img_l"><span class="trip_img_del"></span><img src="'+response.url+'"><input type="hidden" name="imgUp[]" value="'+response.url+'"></div>';
                 $(".trip_img_box").append(img);
             }else{
             	alert("只能上传3张图片");
@@ -105,79 +105,79 @@ trip.add=function(){
 		}
 	})
 }
-/*
-	编辑行程
-*/
-$(".edit").click(function(){
-	var _this=$(this),
-		id=_this.parents("tr").data("tripid"),
-		box=$("#editTripForm .modal-body");
-	$.ajax({
-		url:'../success.php',
-		type:'POST',
-		dataType:'json',
-		data:{
-			id:id,
-		}
-	}).done(function(data){
-		if(data.success){
-			box.html(data.html);
-		}
-	})
-	KindEditor.ready(function(K) {
-    	editDetailed = K.create('#editDetailed',{
-	        uploadJson:'/imageuc/kindeditor/upload?',
-	        resizeType :1,
-	        width:'100%',
-	        height:'300px',
-	        allowPreviewEmoticons : true,
-	        allowImageUpload : true,
-		    items : [
-		    	'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline','removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist','insertunorderedlist'
-				]
-	    });	
-	});
-	editBox.modal("show");
+// /*
+// 	编辑行程
+// */
+// $(".edit").click(function(){
+// 	var _this=$(this),
+// 		id=_this.parents("tr").data("tripid"),
+// 		box=$("#editTripForm .modal-body");
+// 	$.ajax({
+// 		url:'../success.php',
+// 		type:'POST',
+// 		dataType:'json',
+// 		data:{
+// 			id:id,
+// 		}
+// 	}).done(function(data){
+// 		if(data.success){
+// 			box.html(data.html);
+// 		}
+// 	})
+// 	KindEditor.ready(function(K) {
+//     	editDetailed = K.create('#editDetailed',{
+// 	        uploadJson:'/imageuc/kindeditor/upload?',
+// 	        resizeType :1,
+// 	        width:'100%',
+// 	        height:'300px',
+// 	        allowPreviewEmoticons : true,
+// 	        allowImageUpload : true,
+// 		    items : [
+// 		    	'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline','removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist','insertunorderedlist'
+// 				]
+// 	    });	
+// 	});
+// 	editBox.modal("show");
 	
-})
-trip.edit=function(){
-	var id=$("#tripId").val(),
-		num=$("#editNum").val(),		//序号
-		name=$("#editName").val(),		//标题
-		explain=$("#editExplain").val(),		//摘要
-		detailed=editDetailed.html(),		//具体行程
-		imgUp=new Object();		//图片
-		imgs=$("#editTripForm .trip_img_box").find("img");
-	//获取图片地址
-	if(imgs.length>0){
-		imgs.each(function(i,v){
-			var url=$(v).attr("src");
-			imgUp[i]=url;
-		})
-	}
-	if(!name){
-		alert("请输入行程标题");
-		return false;
-	}
-	$.ajax({
-		url:'../success.php',
-		type:'POST',
-		dataType:'json',
-		data:{
-			id:id,
-			pordId:pordId,
-			num:num,
-			name:name,
-			explain:explain,
-			detailed:detailed,
-			imgUp:imgUp
-		}
-	}).done(function(data){
-		if(data.success){
-			editBox.modal("hide");
-		}
-	})
-}
+// })
+// trip.edit=function(){
+// 	var id=$("#tripId").val(),
+// 		num=$("#editNum").val(),		//序号
+// 		name=$("#editName").val(),		//标题
+// 		explain=$("#editExplain").val(),		//摘要
+// 		detailed=editDetailed.html(),		//具体行程
+// 		imgUp=new Object();		//图片
+// 		imgs=$("#editTripForm .trip_img_box").find("img");
+// 	//获取图片地址
+// 	if(imgs.length>0){
+// 		imgs.each(function(i,v){
+// 			var url=$(v).attr("src");
+// 			imgUp[i]=url;
+// 		})
+// 	}
+// 	if(!name){
+// 		alert("请输入行程标题");
+// 		return false;
+// 	}
+// 	$.ajax({
+// 		url:'../success.php',
+// 		type:'POST',
+// 		dataType:'json',
+// 		data:{
+// 			id:id,
+// 			pordId:pordId,
+// 			num:num,
+// 			name:name,
+// 			explain:explain,
+// 			detailed:detailed,
+// 			imgUp:imgUp
+// 		}
+// 	}).done(function(data){
+// 		if(data.success){
+// 			editBox.modal("hide");
+// 		}
+// 	})
+// }
 /*
 	删除行程
 */

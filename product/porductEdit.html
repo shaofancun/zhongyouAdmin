@@ -224,7 +224,7 @@
                                                         <span class="time1">请选择时间</span>
                                                         <button type="button" class="btn btn-default btn-xs" onclick="spec.del(this,'1')"><i class="fa fa-times"></i> 删除</button>
                                                         <button type="button" class="btn btn-default btn-xs time_change"><i class="fa fa-pencil"></i> 选择时间</button>
-                                                        <input type="hidden" name="items[1][time]" value="">
+                                                        <input type="hidden" name="item_s[1][time]" value="">
                                                     </a>
                                                     </li>
                                                 </ul>
@@ -252,26 +252,26 @@
                                                     </thead>
                                                     <tbody>
                                                       <tr data-trid="1">
-                                                        <td><input type="text" class="form-control input-sm" name="items[1][art][1]"></td>
-                                                        <td><input type="text" class="form-control input-sm" name="items[1][item_name][1]" value="成人"></td>
-                                                        <td><select class="form-control input-sm spec_select" name="items[1][specval][1]"></select></td>
-                                                        <td><input type="text" class="form-control input-sm" name="items[1][price][1]"></td>
-                                                        <td><input type="text" class="form-control input-sm" name="items[1][cost_price][1]"></td>
-                                                        <td><input type="text" class="form-control input-sm" name="items[1][mktprice][1]"></td>
-                                                        <td><input type="text" class="form-control input-sm" name="items[1][stock][1]"></td>
+                                                        <td><input type="text" class="form-control input-sm" name="item_s[1][row][1][art]"></td>
+                                                        <td><input type="text" class="form-control input-sm" name="item_s[1][row][1][item_name]" value="成人"></td>
+                                                        <td><select class="form-control input-sm spec_select" name="item_s[1][row][1][specval]"></select></td>
+                                                        <td><input type="text" class="form-control input-sm" name="item_s[1][row][1][price]"></td>
+                                                        <td><input type="text" class="form-control input-sm" name="item_s[1][row][1][cost_price]"></td>
+                                                        <td><input type="text" class="form-control input-sm" name="item_s[1][row][1][mktprice]"></td>
+                                                        <td><input type="text" class="form-control input-sm" name="item_s[1][row][1][stock]"></td>
                                                       </tr>
                                                       <tr data-trid="2">
-                                                      <td><input type="text" class="form-control input-sm" name="items[1][art][2]"></td>
-                                                        <td><input type="text" class="form-control input-sm" name="items[1][item_name][2]" value="儿童"></td>
-                                                        <td><select class="form-control input-sm spec_select" name="items[1][specval][2]"></select></td>
-                                                        <td><input type="text" class="form-control input-sm" name="items[1][price][2]"></td>
-                                                        <td><input type="text" class="form-control input-sm" name="items[1][cost_price][2]"></td>
-                                                        <td><input type="text" class="form-control input-sm" name="items[1][mktprice][2]"></td>
-                                                        <td><input type="text" class="form-control input-sm" name="items[1][stock][2]"></td>
+                                                      <td><input type="text" class="form-control input-sm" name="item_s[1][row][1][art]"></td>
+                                                        <td><input type="text" class="form-control input-sm" name="item_s[1][row][1][item_name]" value="儿童"></td>
+                                                        <td><select class="form-control input-sm spec_select" name="item_s[1][row][1][specval]"></select></td>
+                                                        <td><input type="text" class="form-control input-sm" name="item_s[1][row][1][price]"></td>
+                                                        <td><input type="text" class="form-control input-sm" name="item_s[1][row][1][cost_price]"></td>
+                                                        <td><input type="text" class="form-control input-sm" name="item_s[1][row][1][mktprice]"></td>
+                                                        <td><input type="text" class="form-control input-sm" name="item_s[1][row][1][stock]"></td>
                                                       </tr>
                                                     </tbody>
                                                   </table>
-                                                  <button type="button" class="btn green" onclick="spec.addTr(this,'1')"><i class="fa fa-plus"></i> 增加一行</button>
+                                                  <button type="button" class="btn green" onclick="spec.addTr(this)"><i class="fa fa-plus"></i> 增加一行</button>
                                                 </div>
                                             </div>
                                         </div>
