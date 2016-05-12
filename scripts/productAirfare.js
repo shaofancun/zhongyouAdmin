@@ -130,7 +130,9 @@ airfare.edit=function(){
 		}
 	}).done(function(data){
 		if(data.success){
-			editBox.modal("hide");
+			addBox.modal("hide").on('hidden.bs.modal', function (e) {
+				window.location.reload();
+			})
 		}
 	})
 }
